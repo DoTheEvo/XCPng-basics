@@ -14,7 +14,7 @@
 # Purpose & Overview
 
 A virtualization platform build around
-Xen a type 1 **hypervisor**.<br>
+Xen a **type 1 hypervisor**.<br>
 An alternative to vmware esxi/vsphere, or proxmox, or hyper-v.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
@@ -22,16 +22,16 @@ is an open source project, developed under **the Linux Foundation** with
 support from major industry players - intel, amd, arm, aws, google,
 alibaba cloud, huawei,...
 Citrix owned Xen until 2013, when they made it open-source.
-In 2022, Citrix was acquired by a private equity group for $16 billion.
 
 [XCP-ng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
 as a fork of XenServer, which with version 7.0 closed-source some of it's components.
-The first release was in 2018, but Vates, the company behind it,
+The first release was in 2018, but Vates - the company behind it,
 worked on Xen Orchestra since 2012. They are located in France
 and have \~40 employees.
 
 * **xen** - The hypervisor, developed by Linux Foundation.
-* **xcpng** - A single purpose linux distro preconfigured with xen, centos userspace.
+* **xcpng** - A single purpose linux distro preconfigured with xen,
+  uses centos userspace.
 * **XO** - Xen Orchestra - a web interface for centralized management
   of xcpng hosts,<br>
   usually deployed as a container or a virtual machine.
@@ -62,7 +62,7 @@ and the search for ESXi replacement started.
   get few more major releases and improvements as vmware refuges start to give
   input and money.
   
-* **XCP-ng** - Seen it mentioned and had a spare Fujitsu P558 with i3-9100
+* **XCPng** - Seen it mentioned and had a spare Fujitsu P558 with i3-9100
   to test it on. After I wrapped my head around the need to deploy Xen Orchestra
   somewhere else, it felt like everything was simple and
   **it just worked with minimal effort**.
@@ -111,7 +111,8 @@ the experience there was **not as hurdle free as that first time**.
 But still.. that first impression sold me on it pretty hard.
 
 <details>
-<summary>the issues encountered so far</summary>
+<summary><h5>Problems encountered.</h5></summary>
+
 * **A VM with "Generic Linux UEFI" preset 
   [failed to boot from arch ISO](https://i.imgur.com/cnnlBtJ.png)**<br>
   Weird issue. Seems the cause is that the ISO SR was created in `/media`
@@ -131,6 +132,28 @@ But still.. that first impression sold me on it pretty hard.
 
 </details>
 
+
+<details>
+<summary><h5>Links of some informative value.</h5></summary>
+
+* [gyptazy - XCP-ng - A More Professional Alternative to Proxmox Based on Xen](https://gyptazy.com/xcp-ng-a-more-professional-alternative-to-proxmox-based-on-xen/)<br>
+  xcpng loses or just keeps up in performance tests and theres
+  focus on poorer hardware support of xcpng
+* [xda-developers - Proxmox vs. XCP-ng: Which one's better for your home lab?](https://www.xda-developers.com/proxmox-vs-xcp-ng/)<br>
+  generic head to head comparison, with proxmox being awarded the best for homelab
+* [youtube - 45Drives - Proxmox VE v.s. XCP-ng: A Live Discussion with Tom Lawrence](https://www.youtube.com/live/3UHE-6bOoK8)<br>
+  lengthy video, good natured back and forth showcasing features 
+* [youtube -  2GuysTek - Life After VMware - A summary and comparison of hypervisors!](https://youtu.be/eQgzITx1Sp8)<br>
+  a summary video in a series about hypervisors, his pick in the end is proxmox
+* [jbssm reddit - My personal impressions on Proxmox vs XCP-ng](https://www.reddit.com/r/homelab/comments/12j0rry/my_personal_impressions_on_proxmox_vs_xcpng/)<br>
+  a reddit post about why a user prefers xcpng, bit of drama in the comments
+  arguing type 1 vs type 2 hypervisors
+
+</details>
+
+---
+---
+
 </details>
 
 # Xen Orchestra
@@ -142,7 +165,7 @@ But still.. that first impression sold me on it pretty hard.
 * **XO** - Xen Orchestra - Free version.
 * **XOA** - Xen Orchestra Appliance - Paid version of XO.
 * **XO Lite** - Preinstalled on every host. Provides basic information
-  and simplifies XOA deployment. Currently a work in progress.
+  and simplifies XOA deployment. Under development.
 
 Unlike esxi or proxmox, going with a browser to the IP of an xcpng host
 **shows just [XO-Lite,](https://docs.xcp-ng.org/management/manage-locally/xo-lite/)**
@@ -166,20 +189,23 @@ But if the machine running xcpng is **your first and only server**,
 you gotta go with a virtualbox or hyper-v on your desktop/notebook, deploy
 XO there.. and then use that XO to deploy new XO on to the xcpng host itself.
 
-It seems complicated and maybe it is, but if you ever move towards more servers
-**it starts to make sense** -  not having your centralized management tool running
-on the thing it manages.<br>
+It seems complicated, but if you ever get more servers **it starts to make sense**
+\-  not having your centralized management tool running on the thing it manages.<br>
 But yeah, it also means it is less friendly towards - *"my first home server"*
 deployments. We will see what XO Lite brings in the future.
 
 <details>
-<summary><h4>XO running as a docker container</h4></summary>
+<summary><h4>XO in Docker</h4></summary>
 
 * [ronivay github](https://github.com/ronivay/xen-orchestra-docker)
 
-Note the port `80` is just exposed, not mapped on to the host.
-Theres expectations of having a reverse proxy..
-if not just change `expose` to `ports` and set some mapping, like `2280:80`
+The compose here uses ronivay's image and is a variation of their compose.
+
+The changes made - switching from volumes to bind mounts and not mapping 
+port `80` to docker host port `80`, but just using `expose` to document the port
+webGUI is using. Reason is that theres an expectation of running a reverse proxy.
+If no reverse proxy then go with
+[ronivay's port mapping](https://github.com/ronivay/xen-orchestra-docker/blob/master/docker-compose.yml).
 
 `compose.yml`
 ```yml
@@ -260,7 +286,7 @@ xo.{$MY_DOMAIN} {
 
 # The Basics
 
-### XCP-ng Host Installation
+### XCPng Host Installation
 
 [Official docs.](https://docs.xcp-ng.org/installation/install-xcp-ng/)
 
@@ -458,7 +484,9 @@ After reboot of the VM I had igpu in and successfully used it in jellyfin.
 
 </details>
 
-# Backups 
+# Backups
+
+![backup-job-report](https://i.imgur.com/AudRSUP.png)
 
 * [Official docs](https://docs.xen-orchestra.com/backup)
 * [Official docs2](https://docs.xcp-ng.org/management/backup/)
@@ -473,7 +501,7 @@ source of information. Stuff here are just some highlights, notes.
   * **Rolling Snapshot**<br>
     Takes a snapshot at schedule. Retention is set in the schedule section.
   * **Backup**<br>
-    Snapshots and exports VM to a remote location.
+    Snapshot of a VM and then exports to a remote location.
     Full size every time, so lot of space, bandwith and time is used.
   * **Delta Backup**<br>
     Incremental backups of only changes against the initial full back<br>
@@ -495,23 +523,39 @@ source of information. Stuff here are just some highlights, notes.
 
 Gives ability to more broadly target VMs for backup jobs.<br>
 Instead of just selecting manually.. it can be that all running VMs
-on all hosts get rolling snapshots. Or the ones tagged as `production`,
-or the ones that are on a specific host.
+on all hosts get rolling snapshots. Or the ones tagged as `production`
+will have nightly full backup,...
 
 #### Veeam Support
 
 [Seems](https://forums.veeam.com/veeam-backup-replication-f2/xcp-ng-support-t93030-60.html#p531802)
 theres a prototype and a praise of xen api from veeam devs.
 
-### create a remote
+### Remotes
+
+Kinda weird how for backups you are creating remotes and not storage,
+like its some type of different category even when I am doing same nfs..
 
 * Settings > Remotes
-* NFS or Local or SMB
+* Local or NFS or SMB or S3
 * ...
 
 ### Create a backkup job
 
 * Backup > New > VM Backup & Replication
+
+### Backup reports
+
+First setup email server for notifications
+
+* Settings > Plugins > `transport-email`<br>
+* I use a free Brevo account for an smtp server - 300 emails a day.
+
+Then in backup job settings 
+
+* Report when - always | skipped or failure
+* Report recipient - set an email and you have to **press the plus** sign
+* Save 
 
 # Advanced Concepts
 
@@ -534,6 +578,12 @@ adding more hosts.
     * Resource Pool Configuration > Join a Resource Pool
     * give hostname of the existing pool master
     * root and password
+
+### Email Notifications 
+
+Settings > Plugins > `transport-email`
+
+I use fre Brevo account for an smtp server.
 
 ### Monitoring
 
@@ -596,6 +646,30 @@ The above docs link gives good overview. To keep it simple
 * ext4 for local storage
 * nfs fo remotes
 
+Various file types encountered.
+
+* `VDI` - Virtual Disk Storage - a concept, not an actual file type
+* `.vhd` - file representing a virtual disk
+* `.xva` - archive of a VM, used for backups
+* `.iso` - bootable dvd image, usually for OS installation
+
 #### Virtualization Models
 
-PV vs HVM vs PVH
+![xen-virt-modes](https://i.imgur.com/FagP99J.png)
+
+[Xenproject wiki](https://wiki.xenproject.org/wiki/Understanding_the_Virtualization_Spectrum)
+has a good article on these, especially with bit of history.
+
+* **PV** - Paravirtualization<br>
+  The oldest way, bypassing need for emulation
+  of hardware by having the guest OS aware of being in a VM, running with
+  a modified kernel and using a specific API.
+* **HVM** - Hardware Virtual Machine<br>
+  Full emulation of hardware using hardware support - intel VT-x | AMD-V
+* **PVHVM** -   Hardware virtualization with paravirtualization drivers enabled<br>
+  HVM performed worse in some aspects, especially I/O, installing the PV
+  emulated device drivers bypasses some qemu overhead, improving the performance.
+* **PVH** - Paravirtualization-on-HVM<br>
+  Further performance improvements and reduced complexity. Completely drops
+  the need for qemu for the emulation of hardware. Not yet really used.
+
