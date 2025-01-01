@@ -4,6 +4,13 @@
 
 ![logo](https://i.imgur.com/FBH2aII.png)
 
+1. [Purpose & Overview](#Purpose--Overview)
+2. [Why XCP-ng](#Why-XCP-ng)
+3. [Xen Orchestra](#Xen-Orchestra)
+4. [The Basics](#The-Basics)
+5. [Backups](#Backups)
+6. [Advanced Concepts](#Advanced-Concepts)
+
 # Purpose & Overview
 
 A virtualization platform build around
@@ -11,14 +18,15 @@ Xen a type 1 **hypervisor**.<br>
 An alternative to vmware esxi/vsphere, or proxmox, or hyper-v.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
-is an open source project, developed by **Linux Foundation** with
-backing from intel, amd, arm, aws, google, alibaba cloud, huawei,...
-Citrix owned Xen until 2013, when they made it open-source..
-In 2022 Citrix was sold for $16 billion to a private equity group.
+is an open source project, developed under **the Linux Foundation** with
+support from major industry players - intel, amd, arm, aws, google,
+alibaba cloud, huawei,...
+Citrix owned Xen until 2013, when they made it open-source.
+In 2022, Citrix was acquired by a private equity group for $16 billion.
 
 [XCP-ng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
 as a fork of XenServer, which with version 7.0 closed-source some of it's components.
-The first release was in 2018, but Vates - the company behind it
+The first release was in 2018, but Vates, the company behind it,
 worked on Xen Orchestra since 2012. They are located in France
 and have \~40 employees.
 
@@ -48,8 +56,8 @@ and the search for ESXi replacement started.
   Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
   The thing is that I never felt drawn to it. It felt like I would be spending
   a lot of time learning the ins and outs to feel confident about it
-  and while that's expected, it's still a chore. A chore that's much easier
-  when theres enthusiasm for a project, but for some reason I did not feel it.<br>
+  and while that's expected, it's still a chore. It would be easier if I felt
+  enthusiasm for the project, but for some reason it was not there.<br>
   This made me want to stick longer with esxi and let proxmox cook,
   get few more major releases and improvements as vmware refuges start to give
   input and money.
@@ -58,7 +66,7 @@ and the search for ESXi replacement started.
   to test it on. After I wrapped my head around the need to deploy Xen Orchestra
   somewhere else, it felt like everything was simple and
   **it just worked with minimal effort**.
-  That apparently is what makes me enthusiastic about stuff.
+  And that apparently is what makes me enthusiastic about stuff.
 
   * Tried to spin **win11 24H2** and it just worked without manually dealing
     with TPM. The VM creation did not feel overwhelming with 19 options
@@ -108,8 +116,8 @@ But still.. that first impression sold me on it pretty hard.
   [failed to boot from arch ISO](https://i.imgur.com/cnnlBtJ.png)**<br>
   Weird issue. Seems the cause is that the ISO SR was created in `/media`
   on the boot drive which was a small OEM nvme ssd that came with that miniPC.
-  The thing is that I had 3 miniPCs at that time and every single one of them
-  failed at this task.<br>
+  The thing is that I had 3 lenovo miniPCs at that time and every single
+  one of them had this issue.<br>
   Any change to the setup **solved the problem**.
   Replacing the ssd with a different larger brand-name nvme ssd;
   creating ISO SR on a different drive; switch to a sata boot ssd;
@@ -131,10 +139,10 @@ But still.. that first impression sold me on it pretty hard.
 
 ![diagram](https://i.imgur.com/MumtDzU.png)
 
-* **XO** - Xen Orchestra - free version
-* **XOA** - Xen Orchestra Appliance - a paid version of XO
-* **XO Lite** - preinstalled on every host, just informative and eases XOA
-  deployment, work in progress
+* **XO** - Xen Orchestra - Free version.
+* **XOA** - Xen Orchestra Appliance - Paid version of XO.
+* **XO Lite** - Preinstalled on every host. Provides basic information
+  and simplifies XOA deployment. Currently a work in progress.
 
 Unlike esxi or proxmox, going with a browser to the IP of an xcpng host
 **shows just [XO-Lite,](https://docs.xcp-ng.org/management/manage-locally/xo-lite/)**
@@ -151,7 +159,7 @@ If you have another hypervisor or a docker host it's trivial and quick.
   run [xcpng install script](https://github.com/ronivay/XenOrchestraInstallerUpdater).
   Done.<br>
   Some extra instructions [here](https://forums.lawrencesystems.com/t/how-to-build-xen-orchestra-from-sources-2024/19913).
-* Spin up a **docker host** as VM, run xcpng container.<br>
+* Copy paste **docker compose**, run the container. Done.<br>
   The details are in the docker section below.
 
 But if the machine running xcpng is **your first and only server**,
@@ -236,7 +244,7 @@ xo.{$MY_DOMAIN} {
 
 ### Some aspects of XO
 
-* XO is not needed for VMs to function, but you **lose some functionality**
+* XO is not required for VMs to function, but you **lose some functionality**
   if you turn if off or disconnect it after the VMs are setup.
   * **Backups schedule and their execution.**<br>
     XO is what manages backups, even the data of the VMs that are being backed up
@@ -245,14 +253,14 @@ xo.{$MY_DOMAIN} {
     to be there with the VMs on-site while main management XO is wherever...
   * **Metrics monitoring**.<br>
     Can't look up what was the cpu load last week if XO was not there to record it.
-  * **HA - High Availability** - ...like duh
+  * **HA - High Availability** - ...like duh, something needs to orchestrate it...
 * XO is the free version, compiled from the source, **nagging notices**
   about not having subscription are something thats just there occasionally.
 * \-
 
-# XCP-ng Host Installation
+# The Basics
 
-![xcpng-console-menu](https://i.imgur.com/Iu0bdmh.png)
+### XCP-ng Host Installation
 
 [Official docs.](https://docs.xcp-ng.org/installation/install-xcp-ng/)
 
@@ -265,17 +273,19 @@ After reboot, we are shown a basic info menu, similar to esxi but better.
 I really like the look with all the info and all the options.
 This menu can be open even when SSH in, with `xsconsole` command.
 
-# Basic Setup
+![xcpng-console-menu](https://i.imgur.com/Iu0bdmh.png)
 
-![login-pic](https://i.imgur.com/EuFbbrn.png)
+
+<!-- ![login-pic](https://i.imgur.com/EuFbbrn.png) -->
 <!-- ![login-pic](https://i.imgur.com/VcmDmNE.png) -->
+
 
 ### The First login in to XO
 
 * `admin@admin.net` // `admin`
 * change login email and password<br>
   `Settings` > `Users`
-* Turn off the filters for VMs, as by default only the *running VMs* are shown<br>
+* **Turn off the filters** for VMs, as by default only the *running VMs* are shown<br>
   user icon in the left bottom corner > 
   `Customize filters` > VM - Default filter = None
 
@@ -322,7 +332,7 @@ If `/media` is seletected the storage repo is created on a 18GB root partition.<
  [I use truenas scale](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/trueNASscale#nfs-share)
 * New > Storage
 * Select your_host
-* Set teh name and the description
+* Set the name and the description
 * Select storage type: `NFS ISO`
 * Server: ip_address_of_the_nfs_share
   * search icon
@@ -334,7 +344,7 @@ If `/media` is seletected the storage repo is created on a 18GB root partition.<
 
 </details>
 
-# Virtual Machines creation
+### Virtual Machines creation
 
 ![vms-250px](https://i.imgur.com/eD73qvp.png)
 
@@ -345,11 +355,11 @@ Preconfigured templates take care of lots of settings. They are in json
 format and can be browsed in `/usr/share/xapi/vm-templates`.<br>
 
 * New > VM
-* picking template
+* Select template
 * vCPU, RAM, socket
-* iso
-* network default
-* disks - change the name, set the size
+* ISO
+* Network default
+* Disk - change the name, set the size
 
 ### Guest Additions
 
@@ -361,7 +371,7 @@ The above linked official docs tell well the details.
 
 * citrix closed source<br>
   [Link to download from citrix site](https://www.xenserver.com/downloads)<br>
-  `XenServer VM Tools for Windows 9.4.0` - was in december 2024
+  `XenServer VM Tools for Windows 9.4.0` - was in January 2025
 * github open source version<br>
   [https://github.com/xcp-ng/win-pv-drivers/releases](https://github.com/xcp-ng/win-pv-drivers/releases)<br>
   `XCP-ng Windows PV Tools 8.2.2.200-RC1` - as v9 seems still under development
@@ -374,7 +384,7 @@ so why mix stuff or bother.
 
 [The official docs](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
 
-Again, the linked ocs tell well all the deails.<br>
+Again, the linked docs tell well all the details.<br>
 For my go-to arch linux I just
 
 * `yay xe-guest-utilities-xcp-ng`
@@ -491,7 +501,7 @@ or the ones that are on a specific host.
 #### Veeam Support
 
 [Seems](https://forums.veeam.com/veeam-backup-replication-f2/xcp-ng-support-t93030-60.html#p531802)
-theres a prototype and a praise from veeam developers for quality of xen api.
+theres a prototype and a praise of xen api from veeam devs.
 
 ### create a remote
 
@@ -503,7 +513,9 @@ theres a prototype and a praise from veeam developers for quality of xen api.
 
 * Backup > New > VM Backup & Replication
 
-# Pools
+# Advanced Concepts
+
+### Pools
 
 ![pool-join-pic](https://i.imgur.com/jXaIqHb.png)
 
@@ -523,8 +535,7 @@ adding more hosts.
     * give hostname of the existing pool master
     * root and password
 
-
-# Monitoring xcpng 
+### Monitoring
 
 <details>
 <summary><h3>Prometheus + Grafana monitoring</h3></summary>
@@ -574,9 +585,9 @@ scrape_configs:
 
 </details>
 
-# Notes on some concepts
+### Notes on some concepts
 
-## Storage
+#### Storage
 
 [Official docs.](https://docs.xcp-ng.org/storage/)
 
@@ -585,6 +596,6 @@ The above docs link gives good overview. To keep it simple
 * ext4 for local storage
 * nfs fo remotes
 
-# Virtualization Models
+#### Virtualization Models
 
 PV vs HVM vs PVH
