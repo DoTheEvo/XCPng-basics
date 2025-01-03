@@ -173,9 +173,9 @@ But still.. that first impression sold me on it pretty hard.
 
 ![diagram](https://i.imgur.com/6Q9VJd1.png)
 
-[official docs](https://docs.xen-orchestra.com/)<br>
-[official docs2](https://docs.xcp-ng.org/management/manage-at-scale/xo-web-ui/)<br>
-[github](https://github.com/vatesfr/xen-orchestra)
+[The official docs.](https://docs.xen-orchestra.com/)<br>
+[The official docs2.](https://docs.xcp-ng.org/management/manage-at-scale/xo-web-ui/)<br>
+[Github.](https://github.com/vatesfr/xen-orchestra)
 
 An open source web-based centralized management platform for xcpng servers.
 
@@ -342,7 +342,7 @@ deployments.
 
 ### XCPng Host Installation
 
-[Official docs.](https://docs.xcp-ng.org/installation/install-xcp-ng/)
+[The official docs.](https://docs.xcp-ng.org/installation/install-xcp-ng/)
 
 [Download](https://docs.xcp-ng.org/releases/release-8-3/) the latest release ISO.
 Boot the ISO, I use ventoy, click through the installation...<br>
@@ -387,7 +387,7 @@ This menu can be open even when SSH in, with `xsconsole` command.
 
 ![iso-sr-250px](https://i.imgur.com/3USpQpq.png)
 
-[Official docs.](https://xcp-ng.org/blog/2022/05/05/how-to-create-a-local-iso-repository-in-xcp-ng/)
+[The official docs.](https://xcp-ng.org/blog/2022/05/05/how-to-create-a-local-iso-repository-in-xcp-ng/)
 
 ##### Local Storage Repo
 
@@ -428,7 +428,7 @@ If `/media` is seletected the storage repo is created on a 18GB root partition.<
 
 ![vms-250px](https://i.imgur.com/eD73qvp.png)
 
-[Official docs.](https://docs.xcp-ng.org/vms/)
+[The official docs.](https://docs.xcp-ng.org/vms/)
 
 Spinning a new VM is easy and quick.<br>
 Preconfigured templates take care of lots of settings. They are in json
@@ -462,7 +462,7 @@ so why mix stuff or bother.
 
 #### Linux
 
-[The official docs](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
+[The official docs.](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
 
 Again, the linked docs tell well all the details.<br>
 For my go-to arch linux I just
@@ -475,7 +475,7 @@ For my go-to arch linux I just
 
 ![tx-checksumming-off](https://i.imgur.com/brpHNA5.png)
 
-[Official docs.](https://docs.xcp-ng.org/guides/pfsense/)
+[The official docs.](https://docs.xcp-ng.org/guides/pfsense/)
 
 The most important bit of info is to disable `TX Checksum Offload`<br>
 [Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
@@ -543,9 +543,9 @@ No luck so far.
 
 ![backup-diagram](https://i.imgur.com/cFF1D5p.png)
 
-* [Official docs](https://docs.xen-orchestra.com/backup)
-* [Official docs2](https://docs.xcp-ng.org/management/backup/)
-* [Lawrence Systems video](https://youtu.be/weVoKm8kDb4)
+* [The official docs.](https://docs.xen-orchestra.com/backup)
+* [The official docs2.](https://docs.xcp-ng.org/management/backup/)
+* [Lawrence Systems video.](https://youtu.be/weVoKm8kDb4)
 
 Backups are important enough that the official docs should be the main
 source of information. Stuff here are just some highlights, notes. 
@@ -695,7 +695,7 @@ scrape_configs:
 
 ### Storage
 
-[Official docs.](https://docs.xcp-ng.org/storage/)
+[The official docs.](https://docs.xcp-ng.org/storage/)
 
 The above docs link gives good overview.
 I plan to keep it simple.
