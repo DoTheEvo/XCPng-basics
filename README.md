@@ -291,6 +291,12 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
 <details>
 <summary><h5>Videos showcasing the process</h5></summary>
 
+https://github.com/user-attachments/assets/66fdb443-4218-4eb2-b07c-23a1e95d2830
+https://github.com/user-attachments/assets/b3d5083c-be5b-4cad-bae9-834626a15346
+https://github.com/user-attachments/assets/2195474a-3ad5-493b-a42f-9b852155ba0f
+https://github.com/user-attachments/assets/2ccc6824-b7a5-4ebb-a57e-64527c931e96
+https://github.com/user-attachments/assets/a88efff1-4547-4140-8664-196292e6b800
+
 </details>
 
 It's more complicated, but if you ever get more servers this approach
