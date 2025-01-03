@@ -20,8 +20,8 @@ An alternative to esxi or proxmox.
 [Xen](https://en.wikipedia.org/wiki/Xen)
 is an open source project, developed under **the Linux Foundation** with
 support from major industry players - aws, intel, amd, arm, google,
-alibaba cloud, ...
-2007-2013 Citrix stood behind Xen development, but transfered the project
+alibaba cloud,...<br>
+2007-2013 Citrix directed Xen development, but gave up the control
 to attrack more collaboration from the industry giants, of which aws(amazon)
 is the biggest xen user. 
 
@@ -82,10 +82,10 @@ And that apparently is what makes me enthusiastic about stuff.
   improve performance.
 * Tried to spin **arch linux**, no problem, zero pauses to read up on what to do
   to get uefi boot working, or some dealings with secure boot. No issues, 
-  no complications, no refusal to turn off when told to turn off.
+  no complications, no refusal to turn off when the VM was told to turn off.
 * Tried **igpu passthrough** in to that arch to test jellyfin in docker..
   and it was just pushing a slider next to the igpu and a restart of the host
-  and then in the VM settings picking the igpu from a list.
+  and then in the VM's settings picking the igpu from a list.
 * Tried to deploy **opnsense** with wan side and lan side networks
   and some win VM that would be only connected to the opnsense LAN side..
   and it also just straight up worked, no complicated menus and options,
