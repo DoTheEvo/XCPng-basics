@@ -19,9 +19,11 @@ An alternative to esxi or proxmox.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
 is an open source project, developed under **the Linux Foundation** with
-support from major industry players - intel, amd, arm, aws, google,
-alibaba cloud, huawei,...
-Citrix owned Xen until 2013, when they made it open-source.
+support from major industry players - aws, intel, amd, arm, google,
+alibaba cloud, ...
+2007-2013 Citrix stood behind Xen development, but transfered the project
+to attrack more collaboration from the industry giants, of which aws(amazon)
+is the biggest xen user. 
 
 [XCPng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
 as a fork of XenServer, which with version 7.0 closed-source some of it's components.
@@ -29,7 +31,7 @@ The first release was in 2018, but Vates - the company behind it,
 worked on Xen Orchestra since 2012. They are located in France
 and have \~40 employees.
 
-* **Xen** - The hypervisor, developed by Linux Foundation.
+* **Xen** - The hypervisor.
 * **XCPng** - A single purpose linux distro preconfigured with xen,
   uses centos userspace.
 * **XO** - Xen Orchestra - a web interface for centralized management
@@ -62,7 +64,7 @@ And while that's expected, it's still a chore, still an annoyance
 forced on you.<br>
 This made me want to stick longer with esxi and let proxmox cook,
 get few more major releases and improvements as vmware refuges start to give
-input and money.
+feeback and money.
   
 ### XCPng 
 
@@ -87,7 +89,7 @@ And that apparently is what makes me enthusiastic about stuff.
 * Tried to deploy **opnsense** with wan side and lan side networks
   and some win VM that would be only connected to the opnsense LAN side..
   and it also just straight up worked, no complicated menus and options,
-  no spending lot of time reading and investigating.
+  no spending lot of time investigating.
 * Tried **snaphots** and it was simple. Though they are simple in all
   hypervisors I guess.
 * Tried **to backup a VM** to a network share and it seemed ok,
@@ -171,20 +173,22 @@ But still.. that first impression sold me on it pretty hard.
 
 ![diagram](https://i.imgur.com/6Q9VJd1.png)
 
+[official docs](https://docs.xen-orchestra.com/)<br>
+[official docs2](https://docs.xcp-ng.org/management/manage-at-scale/xo-web-ui/)<br>
+[github](https://github.com/vatesfr/xen-orchestra)
+
+An open source web-based centralized management platform for xcpng servers.
+
 * **XO** - Xen Orchestra - Free version compiled from the source.
 * **XOA** - Xen Orchestra Appliance - Paid version. Functional in free mode
   but with limitations.
-* **XO Lite** - Xen Orchestra Lite - Present on every host. Only provides basic info and simplifies
-  XOA deployment. Under development.
+* **XO Lite** - Xen Orchestra Lite - Running on every host.
+  Only provides basic info and simplifies XOA deployment. Under development.
 
-Unlike esxi or proxmox, going with a browser to the IP of an xcpng host
-**shows just [XO-Lite,](https://docs.xcp-ng.org/management/manage-locally/xo-lite/)**
-which is not very useful.
-
-To get **full functionality while keeping it free** one needs to deploy
-XO - Xen Orchestra.<br>
-Either as a VM or a docker container. And either on to the xcpng host or whatever
-other machine that can ping the host. The complication is that
+Most non commercial users want to deploy XO which provides
+**full functionality while being free.**
+It can run either as a VM or a docker container. And either on the xcpng host
+or whatever other machine that can ping the host. The complication is that
 **you need XO to deploy XO on to an xcpng host**.
 
 If you have a docker host or an another hypervisor it's trivial and quick.
@@ -321,8 +325,8 @@ deployments.
 
 #### Some aspects of XO
 
-* XO is not required for VMs to function, but you **lose some functionality**
-  if you turn if off or disconnect it after the VMs are setup.
+* Once VMs are up and running XO is not required for them to function, but you
+  **lose some functionality** if you would turn if off or disconnect.
   * **Backups schedule and their execution.**<br>
     XO is what manages backups, even the data of the VMs that are being backed up
     flow through the XO during a backup job if it's going to a network share.
