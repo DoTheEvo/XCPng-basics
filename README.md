@@ -14,7 +14,7 @@
 # Purpose & Overview
 
 A virtualization platform build around
-Xen a **type 1 hypervisor**.<br>
+**Xen a type 1 hypervisor**.<br>
 An alternative to esxi or proxmox.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
@@ -50,51 +50,55 @@ and have \~40 employees.
 In 2022 Broadcom announced the plan to buy VMware for $60 billion
 and the search for ESXi replacement started.
 
-* **Proxmox** - The absolute front runner, debian based, **huge active community**,
-  dozens of tech youtubers, a proven solution being out there for **20 years**.
-  Made in Austria.<br>
-  Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
-  The thing is that I never felt drawn to it. Felt like I would be spending
-  a lot of time learning the ins and outs to match the confidence I had in esxi.
-  And while that's expected, it's still a chore, still an annoyance kinda
-  force on you.<br>
-  This made me want to stick longer with esxi and let proxmox cook,
-  get few more major releases and improvements as vmware refuges start to give
-  input and money.
-  
-* **XCPng** - Seen it mentioned and had a spare Fujitsu P558 with i3-9100
-  to test it on. After I wrapped my head around the need to deploy Xen Orchestra
-  somewhere else, it felt like everything was simple and
-  **it just worked with minimal effort**.
-  And that apparently is what makes me enthusiastic about stuff.
+### Proxmox
 
-  * Tried to spin **win11 24H2** and it just worked without manually dealing
-    with TPM. The VM creation did not feel overwhelming with 19 options
-    and settings and choices which are all opportunities for a fuck up.
-    Once RDPed in, it felt fast and responsive, without anything weird
-    happening and without being send to read 5 pages on how to tweak it to
-    improve performance.
-  * Tried to spin **arch linux**, no problem, zero pauses to read up on what to do
-    to get uefi boot working, or dealing with secure boot or whatever.
-    No complications.
-  * Tried **igpu passthrough** in to that arch to test jellyfin in docker..
-    and it was just pushing a slider next to the igpu and a restart of the host
-    and then in the VM settings picking the igpu from a list.
-  * Tried to deploy **opnsense** with wan side and lan side networks
-    and some win VM that would be only connected to the opnsense LAN side..
-    and it also just straight up worked, no complicated menus and options,
-    no spending time reading or googling.
-  * Tried **snaphots** and it was simple. Though they are simple in all
-    hypervisors I guess.
-  * Tried **to backup a VM** to a network share and it seemed ok,
-    also **rolling snapshots** just worked with simple scheduling.
-    Though in backups there are more options and menus and terms that will
-    require reading and testing...  but even this basic intuitive stuff beats
-    the free esxi with the ghetto script.
-  * Tried **migrating a VM from esxi** and it was also ridiculously easy.
-    Just giving the ip and credentials, selecting which VM to migrate
-    and what kind of system it is.
-    Though it took \~5 hours for a 90GB vmkd.
+The absolute front runner, debian based, **huge active community**,
+dozens of tech youtubers, a proven solution being out there for **20 years**.
+Made in Austria.<br>
+Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
+The thing is that I never felt drawn to it. Felt like I would be spending
+a lot of time learning the ins and outs to match the confidence I had in esxi.
+And while that's expected, it's still a chore, still an annoyance
+forced on you.<br>
+This made me want to stick longer with esxi and let proxmox cook,
+get few more major releases and improvements as vmware refuges start to give
+input and money.
+  
+### XCPng 
+
+Seen it mentioned and had a spare Fujitsu P558 with i3-9100
+to test it on. After I wrapped my head around the need to deploy Xen Orchestra
+somewhere else, it felt like everything was simple and
+**it just worked with minimal effort**.
+And that apparently is what makes me enthusiastic about stuff.
+
+* Tried to spin **win11 24H2** and it just worked without manually dealing
+  with TPM. The VM creation did not feel overwhelming with 19 options
+  and settings and choices which are all opportunities for a fuck up.
+  Once RDPed in, it felt fast and responsive, without anything weird
+  happening and without being send to read 5 pages on how to tweak it to
+  improve performance.
+* Tried to spin **arch linux**, no problem, zero pauses to read up on what to do
+  to get uefi boot working, or some dealings with secure boot. No issues, 
+  no complications, no refusal to turn off when told to turn off.
+* Tried **igpu passthrough** in to that arch to test jellyfin in docker..
+  and it was just pushing a slider next to the igpu and a restart of the host
+  and then in the VM settings picking the igpu from a list.
+* Tried to deploy **opnsense** with wan side and lan side networks
+  and some win VM that would be only connected to the opnsense LAN side..
+  and it also just straight up worked, no complicated menus and options,
+  no spending lot of time reading and investigating.
+* Tried **snaphots** and it was simple. Though they are simple in all
+  hypervisors I guess.
+* Tried **to backup a VM** to a network share and it seemed ok,
+  also **rolling snapshots** just worked with simple scheduling.
+  Though in backups there are more options and menus and terms that will
+  require reading and testing...  but even this basic intuitive stuff beats
+  the free esxi with the ghetto script.
+* Tried **migrating a VM from esxi** and it was also ridiculously easy.
+  Just giving the ip and credentials, selecting which VM to migrate
+  and what kind of system it is.
+  Though it took \~5 hours for a 90GB vmkd.
 
 The **webUI** of XO has a bit of an [amateurish vibe](https://i.imgur.com/yuUfUhp.png)
 compared to proxmox or esxi, but generally it's clean and simple.
@@ -130,7 +134,8 @@ But still.. that first impression sold me on it pretty hard.
 * igpu **passthrough** of i5-8400T had poor performance, ThinkCentre M720q.<br>
   I am starting to wonder if my initial test with i3-9100 of the passthrough
   really worked as well as I remember it working.<br>
-  Will keep testing when I get some more machines with intel igpu.
+  Will keep testing when I get some intel based machines in hands as right
+  now I got none.
 
 </details>
 
@@ -194,6 +199,8 @@ If you have a docker host or an another hypervisor it's trivial and quick.
 
 <details>
 <summary><h3>XO in Docker</h3></summary>
+
+![docker-logo](https://i.imgur.com/x25dYmF.png)
 
 * [ronivay github](https://github.com/ronivay/xen-orchestra-docker)
 
@@ -280,7 +287,7 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
       and under the account find *"XOA quick deploy - Deploy now".*
   * Click through the setup.
   * Login to XOA at the ip address this new VM got.
-  * Follow [The Basics](#The-Basics) section of this guide to
+  * Follow [The Basics](#The-Basics) section or **the video section** below, to:
     * create **iso storage** and upload iso
     * spin up a **new VM** with debian or ubuntu or centos stream
     * git clone XO install script repo, rename the config file,
@@ -288,8 +295,13 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
     * **add xcpng host** as a server in to the XO
     * delete XOA virtual machine
 
-<details>
-<summary><h5>Videos showcasing the process</h5></summary>
+This all is bit more complicated, but if you ever get more servers this approach
+**starts to make sense** -  not running the centralized management tool
+on the thing it manages.<br>
+But yeah, it also means it is less friendly towards - *"my first home server"*
+deployments.
+
+### Videos showcasing the process
 
 [01-XO-lite-Deploy-XOA.mp4](https://github.com/user-attachments/assets/66fdb443-4218-4eb2-b07c-23a1e95d2830)
 
@@ -301,20 +313,13 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
 
 [05-XO-firstlogin-adding-host-remove-XOA.mp4](https://github.com/user-attachments/assets/a88efff1-4547-4140-8664-196292e6b800)
 
-</details>
-
-It's more complicated, but if you ever get more servers this approach
-**starts to make sense** -  not running the centralized management on the thing
-it manages.<br>
-But yeah, it also means it is less friendly towards - *"my first home server"*
-deployments.
 
 ---
 ---
 
 </details> 
 
-### Some aspects of XO
+#### Some aspects of XO
 
 * XO is not required for VMs to function, but you **lose some functionality**
   if you turn if off or disconnect it after the VMs are setup.
@@ -328,7 +333,6 @@ deployments.
   * **HA - High Availability** - ...like duh, something needs to orchestrate it...
 * XO is the free version, compiled from the source, **nagging notices**
   about not having subscription are something thats just there occasionally.
-* \-
 
 # The Basics
 
@@ -469,8 +473,7 @@ For my go-to arch linux I just
 
 [Official docs.](https://docs.xcp-ng.org/guides/pfsense/)
 
-The most important bit of info is to disable `TX Checksum Offload`
-
+The most important bit of info is to disable `TX Checksum Offload`<br>
 [Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
 will be more detailed info on an example deployment.
 
@@ -568,9 +571,9 @@ source of information. Stuff here are just some highlights, notes.
 #### Smart mode
 
 Gives ability to more broadly target VMs for backup jobs.<br>
-Instead of just selecting manually.. it can be that all running VMs
+Instead of just selecting VMs manually.. it can be that all running VMs
 on all hosts get rolling snapshots. Or the ones tagged as `production`
-will have nightly full backup,...
+will have nightly full backup,...  
 
 #### Veeam Support
 
@@ -582,9 +585,14 @@ theres a prototype and a praise of xen api from veeam devs.
 Kinda weird how for backups you are creating remotes and not storage,
 like its some type of different category even when I am doing same nfs..
 
+`showmount -e 192.168.1.150`  - a handy command showing nfs shares and paths
+
 * Settings > Remotes
 * Local or NFS or SMB or S3
-* ...
+* IP address
+* port - can be left empty
+* path of the share
+* custom options - can be empty 
 
 ### Create a backkup job
 
@@ -706,7 +714,7 @@ has a good article on these, especially with bit of history.
 * **PV** - Paravirtualization<br>
   The oldest way, bypassing need for emulation
   of hardware by having the guest OS aware of being in a VM, running with
-  a modified kernel and using a specific API.
+  a modified kernel and using a specific hypervisor API.
 * **HVM** - Hardware Virtual Machine<br>
   Full emulation of hardware using hardware support - intel VT-x | AMD-V
 * **PVHVM** -   Hardware virtualization with paravirtualization drivers enabled<br>
