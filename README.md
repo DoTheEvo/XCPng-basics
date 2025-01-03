@@ -15,7 +15,7 @@
 
 A virtualization platform build around
 Xen a **type 1 hypervisor**.<br>
-An alternative to vmware esxi/vsphere, or proxmox, or hyper-v.
+An alternative to esxi or proxmox.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
 is an open source project, developed under **the Linux Foundation** with
@@ -23,14 +23,14 @@ support from major industry players - intel, amd, arm, aws, google,
 alibaba cloud, huawei,...
 Citrix owned Xen until 2013, when they made it open-source.
 
-[XCP-ng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
+[XCPng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
 as a fork of XenServer, which with version 7.0 closed-source some of it's components.
 The first release was in 2018, but Vates - the company behind it,
 worked on Xen Orchestra since 2012. They are located in France
 and have \~40 employees.
 
-* **xen** - The hypervisor, developed by Linux Foundation.
-* **xcpng** - A single purpose linux distro preconfigured with xen,
+* **Xen** - The hypervisor, developed by Linux Foundation.
+* **XCPng** - A single purpose linux distro preconfigured with xen,
   uses centos userspace.
 * **XO** - Xen Orchestra - a web interface for centralized management
   of xcpng hosts,<br>
@@ -38,7 +38,7 @@ and have \~40 employees.
 * **XOA** - Xen Orchestra Appliance - a paid version of XO with full support
   and some extra features like [XOSTOR](https://vates.tech/xostor/)
   through webGUI.
-* **xcpng center** - A windows desktop application for management of xcpng hosts,
+* **XCPng Center** - A windows desktop application for management of xcpng hosts,
   a community project, was abandonware but it has
   [a new maintainer](https://github.com/xcp-ng/xenadmin).
 
@@ -54,10 +54,10 @@ and the search for ESXi replacement started.
   dozens of tech youtubers, a proven solution being out there for **20 years**.
   Made in Austria.<br>
   Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
-  The thing is that I never felt drawn to it. It felt like I would be spending
-  a lot of time learning the ins and outs to feel confident about it
-  and while that's expected, it's still a chore. It would be easier if I felt
-  enthusiasm for the project, but for some reason it was not there.<br>
+  The thing is that I never felt drawn to it. Felt like I would be spending
+  a lot of time learning the ins and outs to match the confidence I had in esxi.
+  And while that's expected, it's still a chore, still an annoyance kinda
+  force on you.<br>
   This made me want to stick longer with esxi and let proxmox cook,
   get few more major releases and improvements as vmware refuges start to give
   input and money.
@@ -71,7 +71,9 @@ and the search for ESXi replacement started.
   * Tried to spin **win11 24H2** and it just worked without manually dealing
     with TPM. The VM creation did not feel overwhelming with 19 options
     and settings and choices which are all opportunities for a fuck up.
-    Once RDPed in, it felt snappy and responsive without anything weird happening.
+    Once RDPed in, it felt fast and responsive, without anything weird
+    happening and without being send to read 5 pages on how to tweak it to
+    improve performance.
   * Tried to spin **arch linux**, no problem, zero pauses to read up on what to do
     to get uefi boot working, or dealing with secure boot or whatever.
     No complications.
@@ -82,8 +84,8 @@ and the search for ESXi replacement started.
     and some win VM that would be only connected to the opnsense LAN side..
     and it also just straight up worked, no complicated menus and options,
     no spending time reading or googling.
-  * Tried **snaphots** and it was simple. Though if one makes snapshot with memory
-    the VM is paused during snapshotting.
+  * Tried **snaphots** and it was simple. Though they are simple in all
+    hypervisors I guess.
   * Tried **to backup a VM** to a network share and it seemed ok,
     also **rolling snapshots** just worked with simple scheduling.
     Though in backups there are more options and menus and terms that will
@@ -92,13 +94,13 @@ and the search for ESXi replacement started.
   * Tried **migrating a VM from esxi** and it was also ridiculously easy.
     Just giving the ip and credentials, selecting which VM to migrate
     and what kind of system it is.
-    Though it took \~5 hours for a 90GB vmkd, so that was not that ideal.
+    Though it took \~5 hours for a 90GB vmkd.
 
 The **webUI** of XO has a bit of an [amateurish vibe](https://i.imgur.com/yuUfUhp.png)
 compared to proxmox or esxi, but generally it's clean and simple.
 I like that often the info you see can be clicked and edited right then and there.<br>
-They work on [something new](https://i.imgur.com/dqOSDsi.png) with XO v6 that
-reminds me of opnsense, which is good.
+They do work on [a new redesign](https://i.imgur.com/dqOSDsi.png)
+with XO v6 that reminds me of opnsense, which is good.
 
 When googling proxmox vs xcpng there seems to be a repeating opinion that 
 xcpng is **bit more stable, bit more reliable**. Which obviously sits well with me,
@@ -106,8 +108,8 @@ but I also know that guys like [Jeff from Craft Computing](https://www.youtube.c
 are deploying proxmox commercially left and right for years, so it must be pretty
 stable and I am just glad that I did not find bunch of complains about instability.
  
-Now, since that first try I installed xcpng on a few other machines and
-the experience there was **not as hurdle free as that first time**.
+Now, since that first try I installed xcpng on a few more machines and
+the experience there was **not as hurdle-free as that first time**.
 But still.. that first impression sold me on it pretty hard.
 
 <details>
@@ -118,14 +120,14 @@ But still.. that first impression sold me on it pretty hard.
   Weird issue. Seems the cause is that the ISO SR was created in `/media`
   on the boot drive which was a small OEM nvme ssd that came with that miniPC.
   The thing is that I had 3 lenovo miniPCs at that time and every single
-  one of them had this issue.<br>
+  one of them had this issue. Debian 12 ISO and template also had that issue.<br>
   Any change to the setup **solved the problem**.
   Replacing the ssd with a different larger brand-name nvme ssd;
-  creating ISO SR on a different drive; switch to a sata boot ssd;
-  using nfs share for ISOs; using bios template instead of uefi;...<br>
-  Probably some weird quirk with ext3 and a small nvme ssd or something.
+  creating ISO SR on a different drive; switch to a sata ssd;
+  using nfs share for ISOs; switching to bios;...<br>
+  Probably some weird quirk with uefi and ext3 and a small nvme ssd or something.
 * igpu **passthrough** of ryzen 4350GE is not working at all, ThinkCentre M75q Gen 2.
-* igpu **passthrough** of i5-8400T had poor performance, ThinkCentre M720Q.<br>
+* igpu **passthrough** of i5-8400T had poor performance, ThinkCentre M720q.<br>
   I am starting to wonder if my initial test with i3-9100 of the passthrough
   really worked as well as I remember it working.<br>
   Will keep testing when I get some more machines with intel igpu.
@@ -142,7 +144,7 @@ But still.. that first impression sold me on it pretty hard.
 * [xda-developers - Proxmox vs. XCP-ng: Which one's better for your home lab?](https://www.xda-developers.com/proxmox-vs-xcp-ng/)<br>
   generic head to head comparison, with proxmox being awarded the best for homelab
 * [youtube - 45Drives - Proxmox VE v.s. XCP-ng: A Live Discussion with Tom Lawrence](https://www.youtube.com/live/3UHE-6bOoK8)<br>
-  lengthy video, good natured back and forth showcasing features 
+  lengthy video, good natured back and forth showcasing advanced features of both
 * [youtube -  2GuysTek - Life After VMware - A summary and comparison of hypervisors!](https://youtu.be/eQgzITx1Sp8)<br>
   a summary video in a series about hypervisors, his pick in the end is proxmox
 * [jbssm reddit - My personal impressions on Proxmox vs XCP-ng](https://www.reddit.com/r/homelab/comments/12j0rry/my_personal_impressions_on_proxmox_vs_xcpng/)<br>
@@ -160,49 +162,45 @@ But still.. that first impression sold me on it pretty hard.
 
 <!-- ![diagram](https://i.imgur.com/EuRpfe1.png) -->
 
-![diagram](https://i.imgur.com/MumtDzU.png)
+<!-- ![diagram](https://i.imgur.com/cFF1D5p.png) -->
 
-* **XO** - Xen Orchestra - Free version.
-* **XOA** - Xen Orchestra Appliance - Paid version of XO.
-* **XO Lite** - Preinstalled on every host. Provides basic information
-  and simplifies XOA deployment. Under development.
+![diagram](https://i.imgur.com/6Q9VJd1.png)
+
+* **XO** - Xen Orchestra - Free version compiled from the source.
+* **XOA** - Xen Orchestra Appliance - Paid version. Functional in free mode
+  but with limitations.
+* **XO Lite** - Xen Orchestra Lite - Present on every host. Only provides basic info and simplifies
+  XOA deployment. Under development.
 
 Unlike esxi or proxmox, going with a browser to the IP of an xcpng host
 **shows just [XO-Lite,](https://docs.xcp-ng.org/management/manage-locally/xo-lite/)**
 which is not very useful.
 
-To get **full funcionality while keeping it free** one needs to deploy
-XO - Xen Orchestra. Either as a VM or a docker container. And either on the xcpng
-host or whatever other machine that can ping the host.
-The complication is that **you need XO to deploy XO on to an xcpng host**.
+To get **full functionality while keeping it free** one needs to deploy
+XO - Xen Orchestra.<br>
+Either as a VM or a docker container. And either on to the xcpng host or whatever
+other machine that can ping the host. The complication is that
+**you need XO to deploy XO on to an xcpng host**.
 
-If you have another hypervisor or a docker host it's trivial and quick.
+If you have a docker host or an another hypervisor it's trivial and quick.
 
+* Copy paste **docker compose**, run the container. Done.<br>
+  Details in the docker section below.
 * Spin up a **new debian virtual machine**,
   run [xcpng install script](https://github.com/ronivay/XenOrchestraInstallerUpdater).
   Done.<br>
-  Some extra instructions [here](https://forums.lawrencesystems.com/t/how-to-build-xen-orchestra-from-sources-2024/19913).
-* Copy paste **docker compose**, run the container. Done.<br>
-  The details are in the docker section below.
-
-But if the machine running xcpng is **your first and only server**,
-you gotta go with a virtualbox or hyper-v on your desktop/notebook, deploy
-XO there.. and then use that XO to deploy new XO on to the xcpng host itself.
-
-It seems complicated, but if you ever get more servers **it starts to make sense**
-\-  not having your centralized management tool running on the thing it manages.<br>
-But yeah, it also means it is less friendly towards - *"my first home server"*
-deployments. We will see what XO Lite brings in the future.
+  [The actual commands.](https://pastebin.com/raw/xi1dZVwQ)
+  Some discussion [here.](https://forums.lawrencesystems.com/t/how-to-build-xen-orchestra-from-sources-2024/19913)
 
 <details>
-<summary><h4>XO in Docker</h4></summary>
+<summary><h3>XO in Docker</h3></summary>
 
 * [ronivay github](https://github.com/ronivay/xen-orchestra-docker)
 
 The compose here uses ronivay's image and is a variation of their compose.
 
-The changes made - switching from volumes to bind mounts and not mapping 
-port `80` to docker host port `80`, but just using `expose` to document the port
+The changes made - switching **from volumes to bind mounts** and not mapping 
+port `80` to docker host port `80`, but **just using expose** to document the port
 webGUI is using. Reason is that theres an expectation of running a reverse proxy.
 If no reverse proxy then go with
 [ronivay's port mapping](https://github.com/ronivay/xen-orchestra-docker/blob/master/docker-compose.yml).
@@ -266,7 +264,45 @@ xo.{$MY_DOMAIN} {
 ---
 ---
 
+</details>  
+
+<details>
+<summary><h3>Deploy XO on XCPng itself</h3></summary>
+
+![web-install](https://i.imgur.com/HFwezjG.png)
+
+The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
+
+  * In a browser, go to the xcpng host **IP address**,
+    top right corner you see **Deploy XOA**<br>
+    * btw, one can also initialize this deployment by creating an account
+      on [xen-orchestra.com](https://xen-orchestra.com/)
+      and under the account find *"XOA quick deploy - Deploy now".*
+  * Click through the setup.
+  * Login to XOA at the ip address this new VM got.
+  * Follow [The Basics](#The-Basics) section of this guide to
+    * create **iso storage** and upload iso
+    * spin up a **new VM** with debian or ubuntu or centos stream
+    * git clone XO install script repo, rename the config file,
+      **execute the install script**
+    * **add xcpng host** as a server in to the XO
+    * delete XOA virtual machine
+
+<details>
+<summary><h5>Videos showcasing the process</h5></summary>
+
 </details>
+
+It's more complicated, but if you ever get more servers this approach
+**starts to make sense** -  not running the centralized management on the thing
+it manages.<br>
+But yeah, it also means it is less friendly towards - *"my first home server"*
+deployments.
+
+---
+---
+
+</details> 
 
 ### Some aspects of XO
 
@@ -278,7 +314,7 @@ xo.{$MY_DOMAIN} {
     Theres even [XO Proxy](https://xen-orchestra.com/blog/xen-orchestra-proxy/)
     to be there with the VMs on-site while main management XO is wherever...
   * **Metrics monitoring**.<br>
-    Can't look up what was the cpu load last week if XO was not there to record it.
+    Can't look up cpu load from the last week if XO was not there to record it.
   * **HA - High Availability** - ...like duh, something needs to orchestrate it...
 * XO is the free version, compiled from the source, **nagging notices**
   about not having subscription are something thats just there occasionally.
@@ -486,7 +522,7 @@ After reboot of the VM I had igpu in and successfully used it in jellyfin.
 
 # Backups
 
-![backup-job-report](https://i.imgur.com/AudRSUP.png)
+![backup-diagram](https://i.imgur.com/cFF1D5p.png)
 
 * [Official docs](https://docs.xen-orchestra.com/backup)
 * [Official docs2](https://docs.xcp-ng.org/management/backup/)
@@ -544,6 +580,8 @@ like its some type of different category even when I am doing same nfs..
 
 * Backup > New > VM Backup & Replication
 
+![backup-job-report](https://i.imgur.com/AudRSUP.png)
+
 ### Backup reports
 
 First setup email server for notifications
@@ -559,12 +597,12 @@ Then in backup job settings
 
 # Advanced Concepts
 
-### Pools
+## Pools
 
 ![pool-join-pic](https://i.imgur.com/jXaIqHb.png)
 
 For easier management on larger scale.<br>
-Removes duplicitous effort when setting up network shares or backups.
+Pools remove some duplicitous effort when setting up network shares or backups.
 Allow for easier live migration of VMs or for automatic load balancing.
 Safer updates of the hosts and easier scale up of the compute power by
 adding more hosts.
@@ -579,13 +617,7 @@ adding more hosts.
     * give hostname of the existing pool master
     * root and password
 
-### Email Notifications 
-
-Settings > Plugins > `transport-email`
-
-I use fre Brevo account for an smtp server.
-
-### Monitoring
+## Monitoring
 
 <details>
 <summary><h3>Prometheus + Grafana monitoring</h3></summary>
@@ -635,25 +667,26 @@ scrape_configs:
 
 </details>
 
-### Notes on some concepts
+## Notes on some concepts
 
-#### Storage
+### Storage
 
 [Official docs.](https://docs.xcp-ng.org/storage/)
 
-The above docs link gives good overview. To keep it simple 
+The above docs link gives good overview.
+I plan to keep it simple.
 
 * ext4 for local storage
-* nfs fo remotes
+* nfs for network shares
 
 Various file types encountered.
 
 * `VDI` - Virtual Disk Storage - a concept, not an actual file type
-* `.vhd` - file representing a virtual disk
-* `.xva` - archive of a VM, used for backups
-* `.iso` - bootable dvd image, usually for OS installation
+* `.vhd` - A file representing a virtual disk.
+* `.xva` - An archive of a VM, used for backups.
+* `.iso` - Bootable dvd image, usually for OS installation.
 
-#### Virtualization Models
+### Virtualization Models
 
 ![xen-virt-modes](https://i.imgur.com/FagP99J.png)
 
