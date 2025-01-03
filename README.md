@@ -117,7 +117,7 @@ the experience there was **not as hurdle-free as that first time**.
 But still.. that first impression sold me on it pretty hard.
 
 <details>
-<summary><h5>Problems encountered.</h5></summary>
+<summary><h4>Problems encountered.</h4></summary>
 
 * **A VM with "Generic Linux UEFI" preset 
   [failed to boot from arch ISO](https://i.imgur.com/cnnlBtJ.png)**<br>
@@ -141,7 +141,7 @@ But still.. that first impression sold me on it pretty hard.
 
 
 <details>
-<summary><h5>Links of some informative value.</h5></summary>
+<summary><h4>Links of some informative value.</h4></summary>
 
 * [gyptazy - XCP-ng - A More Professional Alternative to Proxmox Based on Xen](https://gyptazy.com/xcp-ng-a-more-professional-alternative-to-proxmox-based-on-xen/)<br>
   xcpng loses or just keeps up in performance tests and theres
@@ -525,7 +525,9 @@ After reboot of the VM I had igpu in and successfully used it in jellyfin.
 
 ### amd igpu passthrough
 
-`udevadm info --query=all --name=/dev/dri/renderD128`
+No luck so far.
+
+`udevadm info --query=all --name=/dev/dri/renderD128`<br>
 `dmesg | grep -i amdgpu` - if loaded correctly
 
 ---
