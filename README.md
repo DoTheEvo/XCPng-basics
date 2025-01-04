@@ -447,13 +447,13 @@ format and can be browsed in `/usr/share/xapi/vm-templates`.<br>
 
 [The official docs.](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
 
-Consists of two components and 
-you absolutely want to make sure you got both working properly.
+Consist of two components and 
+you **absolutely** want to make sure you got both working properly.
 
-* Kernel Drivers - improve performance, usually I/O<br>
+* Kernel **Drivers** - improve performance, usually I/O.
   * HVM - no drivers
   * PVHVM - drivers present
-* Management Agent - better guest management and metrics reporting<br>
+* Management **Agent** - better guest management and metrics reporting.
   * Management agent not detected
   * Management agent detected
 
