@@ -496,8 +496,8 @@ will be more detailed info on an example deployment.
 
 ![passthrough-pic](https://i.imgur.com/nLNT9iH.gif)
 
-When you want to give a virtual machine direct full hardware access to some device.<br>
-Since v8.3 it is very easy to do through webGUI.
+When you want to give a virtual machine direct full hardware access
+to some device.
 
 #### intel igpu passthrough
 
@@ -531,19 +531,17 @@ monitored with btop and intel_gpu_htop.
 * reboot the hypervisor
 * can use command `xl pci-assignable-list` to check device that can be passthrough    
 
-After reboot of the VM I had igpu in and successfully used it in jellyfin.
+---
+---
 
-### amd igpu passthrough
+</details>
+
+#### amd igpu passthrough
 
 No luck so far.
 
 `udevadm info --query=all --name=/dev/dri/renderD128`<br>
 `dmesg | grep -i amdgpu` - if loaded correctly
-
----
----
-
-</details>
 
 # Backups
 
@@ -555,6 +553,9 @@ No luck so far.
 
 Backups are important enough that the official docs should be the main
 source of information. Stuff here are just some highlights, notes. 
+
+Be aware - **Xen Orchestra is what schedules and executes backups.**<br>
+XO must be running with xcpng hosts, its not a fire and forget deployment.
 
 ### Backup Jobs Types
 
@@ -640,34 +641,38 @@ Then in backup job settings
 ![pool-join-pic](https://i.imgur.com/jXaIqHb.png)
 
 For easier management on larger scale.<br>
-Pools remove some duplicitous effort when setting up network shares or backups.
-Allow for easier live migration of VMs or for automatic load balancing.
+Pools remove some duplicitous effort when setting up shared storage, or networks,
+or backups.
+Allow for easier/faster live migration of VMs or for automatic load balancing.
 Safer updates of the hosts and easier scale up of the compute power by
 adding more hosts.
 
-* All hosts are masters in their own pool, pick one that will be the actual master<br>
-  rename it's pool to something more specific
-* for the machines that will be joining that pool
-  * ssh in or get to the console of the host<br>
+* All hosts are masters in their own pool, **pick one** that will be the master<br>
+  **rename it's pool** to something more specific
+* for the machines that will be **joining** that pool
+  * ssh in or get to the **console** of the host<br>
    Home > Hosts > your_host > Console 
   * `xsconsole` to get the core menu
-    * Resource Pool Configuration > Join a Resource Pool
-    * give hostname of the existing pool master
+    * Resource Pool Configuration > **Join a Resource Pool**
+    * give the hostname of the pool master
     * root and password
 
+I only had few machines in a pool to check it out, do some testing.<br> 
+Might add more info in the future.
+
 ## Monitoring
+
+![prometheus-monit](https://i.imgur.com/CMlikyw.png)
 
 <details>
 <summary><h3>Prometheus + Grafana monitoring</h3></summary>
 
-![prometheus-monit](https://i.imgur.com/CMlikyw.png)
-
-Details on general prometheus + grafana + loki deployment
+To get metrics and setup alerts.<br>
+Details on general prometheus + grafana deployment
 [here.](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/prometheus_grafana_loki)
 
 * [MikeDombo Prometheus exporter](https://github.com/MikeDombo/xen-exporter)
 * [Grafana dashboard - id - 16588](https://grafana.com/grafana/dashboards/16588-xen/)
-
 
 `compose.yml`
 ```yml
