@@ -22,7 +22,7 @@ is an open source project, developed under **the Linux Foundation** with
 support from major industry players - aws, intel, amd, arm, google,
 alibaba cloud,...<br>
 2007-2013 Citrix directed Xen development, but gave up the control
-to attrack more collaboration from the industry giants, of which aws(amazon)
+to attract more collaboration from the industry giants, of which aws(amazon)
 is the biggest xen user. 
 
 [XCPng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
@@ -33,7 +33,7 @@ and have \~40 employees.
 
 * **Xen** - The hypervisor.
 * **XCPng** - A single purpose linux distro preconfigured with xen,
-  uses centos userspace.
+  uses centos user space.
 * **XO** - Xen Orchestra - a web interface for centralized management
   of xcpng hosts,<br>
   usually deployed as a container or a virtual machine.
@@ -64,7 +64,7 @@ And while that's expected, it's still a chore, still an annoyance
 forced on you.<br>
 This made me want to stick longer with esxi and let proxmox cook,
 get few more major releases and improvements as vmware refuges start to give
-feeback and money.
+feedback and money.
   
 ### XCPng 
 
@@ -90,7 +90,7 @@ And that apparently is what makes me enthusiastic about stuff.
   and some win VM that would be only connected to the opnsense LAN side..
   and it also just straight up worked, no complicated menus and options,
   no spending lot of time investigating.
-* Tried **snaphots** and it was simple. Though they are simple in all
+* Tried **snapshots** and it was simple. Though they are simple in all
   hypervisors I guess.
 * Tried **to backup a VM** to a network share and it seemed ok,
   also **rolling snapshots** just worked with simple scheduling.
@@ -403,7 +403,7 @@ This menu can be open even when SSH in, with `xsconsole` command.
   Import > Disk > To SR: `whatever_named`<br>
   It knows the type of the storage repo and allows upload of ISOs
 
-If `/media` is seletected the storage repo is created on a 18GB root partition.<br>
+If `/media` is selected the storage repo is created on a 18GB root partition.<br>
 
 <details>
 <summary><h5>NFS share</h5></summary>
@@ -511,7 +511,7 @@ monitored with btop and intel_gpu_htop.
 <details>
 <summary><h5>The old way - cli passthrough</h5></summary>
 
-[lawrance video](https://www.youtube.com/watch?v=KIhyGvuCDcc)
+[Lawrence video.](https://www.youtube.com/watch?v=KIhyGvuCDcc)
 
 * ssh in on to xcpng host
 * `lspci -D` list the devices that can be passthrough
@@ -557,7 +557,7 @@ source of information. Stuff here are just some highlights, notes.
     Takes a snapshot at schedule. Retention is set in the schedule section.
   * **Backup**<br>
     Snapshot of a VM and then exports to a remote location.
-    Full size every time, so lot of space, bandwith and time is used.
+    Full size every time, so lot of space, bandwidth and time is used.
   * **Delta Backup**<br>
     Incremental backups of only changes against the initial full back<br>
     [CBT](https://xen-orchestra.com/blog/xen-orchestra-5-96/)
@@ -600,7 +600,7 @@ like its some type of different category even when I am doing same nfs..
 * path of the share
 * custom options - can be empty 
 
-### Create a backkup job
+### Create a backup job
 
 * Backup > New > VM Backup & Replication
 
