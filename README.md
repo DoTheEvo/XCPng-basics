@@ -10,6 +10,7 @@
 4. [The Basics](#The-Basics)
 5. [Backups](#Backups)
 6. [Advanced Concepts](#Advanced-Concepts)
+7. [Videos](#Videos)
 
 # Purpose & Overview
 
@@ -27,7 +28,7 @@ is the biggest xen user.
 
 [XCPng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
 as a fork of XenServer, which with version 7.0 closed-source some of it's components.
-The first release was in 2018, but Vates - the company behind it,
+The first release came out in 2018, but Vates - the company behind it,
 worked on Xen Orchestra since 2012. They are located in France
 and have \~40 employees.
 
@@ -59,7 +60,7 @@ dozens of tech youtubers, a proven solution being out there for **20 years**.
 Made in Austria.<br>
 Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
 The thing is that I never felt drawn to it. Felt like I would be spending
-a lot of time learning the ins and outs to match the confidence I had in esxi.
+a lot of time learning the ins and outs to get the confidence I had in esxi.
 And while that's expected, it's still a chore, still an annoyance
 forced on you.<br>
 This made me want to stick longer with esxi and let proxmox cook,
@@ -86,9 +87,9 @@ And that apparently is what makes me enthusiastic about stuff.
 * Tried **igpu passthrough** in to that arch to test jellyfin in docker..
   and it was just pushing a slider next to the igpu and a restart of the host
   and then in the VM's settings picking the igpu from a list.
-* Tried to deploy **opnsense** with wan side and lan side networks
-  and some win VM that would be only connected to the opnsense LAN side..
-  and it also just straight up worked, no complicated menus and options,
+* Tried to deploy **opnsense** with a wan side and a lan side networks
+  and some win VM that would be only connected to the opnsense LAN side...
+  and it also just straight up worked, no crowded complicated menus and settings,
   no spending lot of time investigating.
 * Tried **snapshots** and it was simple. Though they are simple in all
   hypervisors I guess.
@@ -128,12 +129,12 @@ But still.. that first impression sold me on it pretty hard.
   The thing is that I had 3 lenovo miniPCs at that time and every single
   one of them had this issue. Debian 12 ISO and template also had that issue.<br>
   Any change to the setup **solved the problem**.
-  Replacing the ssd with a different larger brand-name nvme ssd;
+  Replacing the ssd with a larger brand-name nvme ssd;
   creating ISO SR on a different drive; switch to a sata ssd;
   using nfs share for ISOs; switching to bios;...<br>
   Probably some weird quirk with uefi and ext3 and a small nvme ssd or something.
 * igpu **passthrough** of ryzen 4350GE is not working at all, ThinkCentre M75q Gen 2.
-* igpu **passthrough** of i5-8400T had poor performance, ThinkCentre M720q.<br>
+* igpu **passthrough** of i5-8400T had a poor performance, ThinkCentre M720q.<br>
   I am starting to wonder if my initial test with i3-9100 of the passthrough
   really worked as well as I remember it working.<br>
   Will keep testing when I get some intel based machines in hands as right
@@ -278,7 +279,7 @@ xo.{$MY_DOMAIN} {
 </details>  
 
 <details>
-<summary><h3>Deploy XO on XCPng itself</h3></summary>
+<summary><h3>XO on XCPng itself</h3></summary>
 
 ![web-install](https://i.imgur.com/HFwezjG.png)
 
@@ -295,7 +296,9 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
     * create **iso storage** and upload iso
     * spin up a **new VM** with debian or ubuntu or centos stream
     * git clone XO install script repo, rename the config file,
-      **execute the install script**
+      **execute the install script**<br>
+      or alternatively setup the new VM **as a docker host** and deploy XO
+      as a container there
     * **add xcpng host** as a server in to the XO
     * delete XOA virtual machine
 
@@ -305,18 +308,7 @@ on the thing it manages.<br>
 But yeah, it also means it is less friendly towards - *"my first home server"*
 deployments.
 
-### Videos showcasing the process
-
-[01-XO-lite-Deploy-XOA.mp4](https://github.com/user-attachments/assets/66fdb443-4218-4eb2-b07c-23a1e95d2830)
-
-[02-XOA-firstlogin-new-vm.mp4](https://github.com/user-attachments/assets/b3d5083c-be5b-4cad-bae9-834626a15346)
-
-[03-debian-install-speed.mp4](https://github.com/user-attachments/assets/2195474a-3ad5-493b-a42f-9b852155ba0f)
-
-[04-XO-install-script.mp4](https://github.com/user-attachments/assets/2ccc6824-b7a5-4ebb-a57e-64527c931e96)
-
-[05-XO-firstlogin-adding-host-remove-XOA.mp4](https://github.com/user-attachments/assets/a88efff1-4547-4140-8664-196292e6b800)
-
+The videos showcasing the process are in [the last chapter](#Videos).
 
 ---
 ---
@@ -349,7 +341,7 @@ Boot the ISO, I use ventoy, click through the installation...<br>
 All is pretty straight forward. The official docs have pretty hand holding
 instructions too.
 
-After reboot, we are shown a basic info menu, similar to esxi but better.
+After reboot, we are shown the basic info menu, similar to esxi but better.
 I really like the look with all the info and all the functionality.
 This menu can be open even when SSH in, with `xsconsole` command.
 
@@ -595,6 +587,14 @@ Instead of just selecting VMs manually.. it can be that all running VMs
 on all hosts get rolling snapshots. Or the ones tagged as `production`
 will have nightly full backup,...  
 
+#### Health check
+
+[Here's](https://youtu.be/A0HTRF3dhQE) Lawrence Systems video on backups
+that are automatically tested. The VM is restored at a host of choice,
+booted without network and theres a check that guest tools agent starts.
+Afterwards this new restored VM is destroyed and health check is marked
+as success.
+
 #### Veeam Support
 
 [Seems](https://forums.veeam.com/veeam-backup-replication-f2/xcp-ng-support-t93030-60.html#p531802)
@@ -744,3 +744,20 @@ has a good article on these, especially with bit of history.
   Further performance improvements and reduced complexity. Completely drops
   the need for qemu for the emulation of hardware. Not yet really used.
 
+<details>
+<summary><h1>Videos</h1></summary>
+
+[01-XO-lite-Deploy-XOA.mp4](https://github.com/user-attachments/assets/66fdb443-4218-4eb2-b07c-23a1e95d2830)
+
+[02-XOA-firstlogin-new-vm.mp4](https://github.com/user-attachments/assets/b3d5083c-be5b-4cad-bae9-834626a15346)
+
+[03-debian-install-speed.mp4](https://github.com/user-attachments/assets/2195474a-3ad5-493b-a42f-9b852155ba0f)
+
+[04-XO-install-script.mp4](https://github.com/user-attachments/assets/2ccc6824-b7a5-4ebb-a57e-64527c931e96)
+
+[05-XO-firstlogin-adding-host-remove-XOA.mp4](https://github.com/user-attachments/assets/a88efff1-4547-4140-8664-196292e6b800)
+
+---
+---
+
+</details>
