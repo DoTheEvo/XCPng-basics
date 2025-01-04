@@ -154,7 +154,7 @@ But still.. that first impression sold me on it pretty hard.
   lengthy video, good natured back and forth showcasing advanced features of both
 * [youtube -  2GuysTek - Life After VMware - A summary and comparison of hypervisors!](https://youtu.be/eQgzITx1Sp8)<br>
   a summary video in a series about hypervisors, his pick in the end is proxmox
-* [jbssm reddit - My personal impressions on Proxmox vs XCP-ng](https://www.reddit.com/r/homelab/comments/12j0rry/my_personal_impressions_on_proxmox_vs_xcpng/)<br>
+* [reddit - My personal impressions on Proxmox vs XCP-ng](https://www.reddit.com/r/homelab/comments/12j0rry/my_personal_impressions_on_proxmox_vs_xcpng/)<br>
   a reddit post about why a user prefers xcpng, bit of drama in the comments
   arguing type 1 vs type 2 hypervisors
 
@@ -325,7 +325,7 @@ deployments.
 
 #### Some aspects of XO
 
-* Once VMs are up and running XO is not required for them to function, but you
+* Once VMs are up and running, XO is not required for them to function. But you
   **lose some functionality** if you would turn if off or disconnect.
   * **Backups schedule and their execution.**<br>
     XO is what manages backups, even the data of the VMs that are being backed up
@@ -344,13 +344,13 @@ deployments.
 
 [The official docs.](https://docs.xcp-ng.org/installation/install-xcp-ng/)
 
-[Download](https://docs.xcp-ng.org/releases/release-8-3/) the latest release ISO.
+[Download](https://docs.xcp-ng.org/releases/) the latest release ISO.
 Boot the ISO, I use ventoy, click through the installation...<br>
 All is pretty straight forward. The official docs have pretty hand holding
 instructions too.
 
 After reboot, we are shown a basic info menu, similar to esxi but better.
-I really like the look with all the info and all the options.
+I really like the look with all the info and all the functionality.
 This menu can be open even when SSH in, with `xsconsole` command.
 
 ![xcpng-console-menu](https://i.imgur.com/Iu0bdmh.png)
@@ -441,11 +441,25 @@ format and can be browsed in `/usr/share/xapi/vm-templates`.<br>
 * Network default
 * Disk - change the name, set the size
 
-### Guest Additions
+### Guest Tools
+
+![agent-detect](https://i.imgur.com/DxP0iFx.gif)
+
+[The official docs.](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
+
+Consists of two components and 
+you absolutely want to make sure you got both working properly.
+
+* Kernel Drivers - improve performance, usually I/O<br>
+  * HVM - no drivers
+  * PVHVM - drivers present
+* Management Agent - better guest management and metrics reporting<br>
+  * Management agent not detected
+  * Management agent detected
 
 #### Windows
 
-[The official docs](https://xcp-ng.org/docs/guests.html#windows)
+[The official docs.](https://xcp-ng.org/docs/guests.html#windows)
 
 The above linked official docs tell well the details.
 
