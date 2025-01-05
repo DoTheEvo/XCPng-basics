@@ -714,12 +714,20 @@ scrape_configs:
       - targets: ['xen01:9100']
 ```
 
-
-
 ---
 ---
 
 </details>
+
+## opnsense or pfsense as a VM in xcpng
+
+![tx-checksumming-off](https://i.imgur.com/brpHNA5.png)
+
+[The official docs.](https://docs.xcp-ng.org/guides/pfsense/)
+
+**The most important** bit of info is to **disable TX Checksum Offload**<br>
+[Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
+will be more detailed example of opnsense deployment.
 
 ## Notes on some concepts
 
@@ -759,22 +767,6 @@ has a good article on these, especially with bit of history.
 * **PVH** - Paravirtualization-on-HVM<br>
   Further performance improvements and reduced complexity. Completely drops
   the need for qemu for the emulation of hardware. Not yet really used.
-
-<details>
-<summary><h3>opnsense as a VM in xcpng</h3></summary>
-
-![tx-checksumming-off](https://i.imgur.com/brpHNA5.png)
-
-[The official docs.](https://docs.xcp-ng.org/guides/pfsense/)
-
-The most important bit of info is to disable `TX Checksum Offload`<br>
-[Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
-will be more detailed info on an example deployment.
-
----
----
-
-</details>
 
 <details>
 <summary><h1>Videos</h1></summary>
