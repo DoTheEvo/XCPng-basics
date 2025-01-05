@@ -286,6 +286,7 @@ xo.{$MY_DOMAIN} {
 
 The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
 
+
   * In a browser, go to the xcpng host **IP address**,
     top right corner you see **Deploy XOA**<br>
     * btw, one can also initialize this deployment by creating an account
@@ -303,18 +304,19 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
     * **add xcpng host** as a server in to the XO
     * delete XOA virtual machine
 
-This all is bit more complicated, but if you ever get more servers this approach
-**starts to make sense** -  not running the centralized management tool
-on the thing it manages.<br>
-But yeah, it also means it is less friendly towards - *"my first home server"*
-deployments.
-
-The videos showcasing the process are in [the last chapter](#Videos).
+**The videos** showcasing the process are in [the last chapter](#Videos).    
 
 ---
 ---
 
 </details> 
+
+XO deployments is an extra step compared to other hypervisors, but if you ever
+get more servers this approach **starts to make sense** -  not thinking
+about running the management tool on the thing it manages. That the hosts are
+thought of as replaceable cogs in a bigger machine...<br>
+But yeah, it also means it is an extra work for - *"my first home server"*
+types of deployments.
 
 #### Some aspects of XO
 
@@ -324,7 +326,7 @@ The videos showcasing the process are in [the last chapter](#Videos).
     XO is what manages backups, even the data of the VMs that are being backed up
     flow through the XO during a backup job if it's going to a network share.
     Theres even [XO Proxy](https://xen-orchestra.com/blog/xen-orchestra-proxy/)
-    to be there with the VMs on-site while main management XO is wherever...
+    to be there with the VMs on-site while the main management XO is wherever...
   * **Metrics monitoring**.<br>
     Can't look up cpu load from the last week if XO was not there to record it.
   * **HA - High Availability** - ...like duh, something needs to orchestrate it...
