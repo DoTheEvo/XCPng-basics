@@ -34,16 +34,17 @@ and have \~40 employees.
 
 * **Xen** - The hypervisor.
 * **XCPng** - A single purpose linux distro preconfigured with xen,
-  uses centos user space.
+  uses centos user space.<br>
+  This is what you install on the metal.
 * **XO** - Xen Orchestra - a web interface for centralized management
-  of xcpng hosts,<br>
-  usually deployed as a container or a virtual machine.
+  of xcpng hosts.<br>
+  Usually deployed as a container or a virtual machine.
 * **XOA** - Xen Orchestra Appliance - a paid version of XO with full support
   and some extra features like [XOSTOR](https://vates.tech/xostor/)
   through webGUI.
 * **XCPng Center** - A windows desktop application for management of xcpng hosts,
-  a community project, was abandonware but it has
-  [a new maintainer](https://github.com/xcp-ng/xenadmin).
+  a community project. Was abandonware but it has a new
+  [maintainer](https://github.com/xcp-ng/xenadmin).
 
 <details>
 <summary><H1>Why XCP-ng</H1></summary>
@@ -55,14 +56,13 @@ and the search for ESXi replacement started.
 
 ### Proxmox
 
-The absolute front runner, debian based, KVM for VMs, LXC for containers,
+The absolute front runner, debian based, uses KVM for VMs, LXC for containers,
 native ZFS, native CEPH, **huge active community**, dozens of tech youtubers,
 a proven solution being out there for **20 years**. Made in Austria.<br>
 Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
 The thing is that I never felt drawn to it. Felt like I would be spending
 a lot of time learning the ins and outs to get the confidence I had with esxi.
-And while that's expected, it's still a chore, still an annoyance
-forced on you.<br>
+And while that's expected, it's still a chore, still an annoyance.<br>
 This made me want to stick longer with esxi and let proxmox cook,
 get few more major releases and improvements as vmware refuges start to give
 feedback and money.
@@ -105,9 +105,10 @@ And that apparently is what makes me enthusiastic about stuff.
 
 The **webUI** of XO has a bit of an [amateurish vibe](https://i.imgur.com/yuUfUhp.png)
 compared to proxmox or esxi, but generally it's clean and simple.
-I like that often the info you see can be clicked and edited right then and there.<br>
+I like that often the info you see can be clicked and edited right then and there.
+That's how you change name, the number of cores, the ram, or enlarge disks.<br>
 They do work on [a new redesign](https://i.imgur.com/dqOSDsi.png)
-with XO v6 that reminds me of opnsense, which is good.
+that reminds me of opnsense, which is good.
 
 When googling proxmox vs xcpng there seems to be a repeating opinion that 
 xcpng is **bit more stable, bit more reliable**. Which obviously sits well with me,
@@ -294,7 +295,7 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
       and under the account find *"XOA quick deploy - Deploy now".*
   * Click through the setup.
   * Login to XOA at the ip address this new VM got.
-  * Follow [The Basics](#The-Basics) section or **the video section** below, to:
+  * Follow [The Basics](#The-Basics) section to:
     * create **iso storage** and upload iso
     * spin up a **new VM** with debian or ubuntu or centos stream
     * git clone XO install script repo, rename the config file,
