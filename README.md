@@ -55,12 +55,12 @@ and the search for ESXi replacement started.
 
 ### Proxmox
 
-The absolute front runner, debian based, **huge active community**,
-dozens of tech youtubers, a proven solution being out there for **20 years**.
-Made in Austria.<br>
+The absolute front runner, debian based, KVM for VMs, LXC for containers,
+native ZFS, native CEPH, **huge active community**, dozens of tech youtubers,
+a proven solution being out there for **20 years**. Made in Austria.<br>
 Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
 The thing is that I never felt drawn to it. Felt like I would be spending
-a lot of time learning the ins and outs to get the confidence I had in esxi.
+a lot of time learning the ins and outs to get the confidence I had with esxi.
 And while that's expected, it's still a chore, still an annoyance
 forced on you.<br>
 This made me want to stick longer with esxi and let proxmox cook,
@@ -71,13 +71,13 @@ feedback and money.
 
 Seen it mentioned and had a spare Fujitsu P558 with i3-9100
 to test it on. After I wrapped my head around the need to deploy Xen Orchestra
-somewhere else, it felt like everything was simple and
+somewhere, it felt like everything was simple and
 **it just worked with minimal effort**.
 And that apparently is what makes me enthusiastic about stuff.
 
 * Tried to spin **win11 24H2** and it just worked without manually dealing
   with TPM. The VM creation did not feel overwhelming with 19 options
-  and settings and choices which are all opportunities for a fuck up.
+  and settings, which all feel like opportunities for a fuck up.
   Once RDPed in, it felt fast and responsive, without anything weird
   happening and without being send to read 5 pages on how to tweak it to
   improve performance.
@@ -156,7 +156,7 @@ But still.. that first impression sold me on it pretty hard.
 * [youtube -  2GuysTek - Life After VMware - A summary and comparison of hypervisors!](https://youtu.be/eQgzITx1Sp8)<br>
   a summary video in a series about hypervisors, his pick in the end is proxmox
 * [reddit - My personal impressions on Proxmox vs XCP-ng](https://www.reddit.com/r/homelab/comments/12j0rry/my_personal_impressions_on_proxmox_vs_xcpng/)<br>
-  a reddit post about why a user prefers xcpng, bit of drama in the comments
+  a reddit post about why the op prefers xcpng, bit of drama in the comments
   arguing type 1 vs type 2 hypervisors
 
 </details>
@@ -174,9 +174,10 @@ But still.. that first impression sold me on it pretty hard.
 
 ![diagram](https://i.imgur.com/6Q9VJd1.png)
 
-[The official docs.](https://docs.xen-orchestra.com/)<br>
-[The official docs2.](https://docs.xcp-ng.org/management/manage-at-scale/xo-web-ui/)<br>
-[Github.](https://github.com/vatesfr/xen-orchestra)
+[The official docs](https://docs.xen-orchestra.com/) and 
+[the official docs2.](https://docs.xcp-ng.org/management/manage-at-scale/xo-web-ui/)<br>
+[Github.](https://github.com/vatesfr/xen-orchestra)<br>
+[Ronivay's install script.](https://github.com/ronivay/XenOrchestraInstallerUpdater)
 
 An open source web-based centralized management platform for xcpng servers.
 
@@ -207,7 +208,7 @@ If you have a docker host or an another hypervisor it's trivial and quick.
 
 ![docker-logo](https://i.imgur.com/x25dYmF.png)
 
-* [ronivay github](https://github.com/ronivay/xen-orchestra-docker)
+[Ronivay's github.](https://github.com/ronivay/xen-orchestra-docker)
 
 The compose here uses ronivay's image and is a variation of their compose.
 
@@ -440,108 +441,66 @@ format and can be browsed in `/usr/share/xapi/vm-templates`.<br>
 [The official docs.](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
 
 Consist of two components and 
-you **absolutely** want to make sure you got both working properly.
+you **absolutely** want to make sure you got both working properly.<br>
+The **info is in the General tab** of every virtual machine.
 
-* Kernel **Drivers** - improve performance, usually I/O.
+* Kernel Paravirtualization **Drivers** - improve performance, usually I/O.
   * HVM - no drivers
   * PVHVM - drivers present
 * Management **Agent** - better guest management and metrics reporting.
   * Management agent not detected
   * Management agent detected
 
-#### Windows
+<details>
+<summary><h4>Windows</h4></summary>
 
 [The official docs.](https://xcp-ng.org/docs/guests.html#windows)
 
 The above linked official docs tell well the details.
 
-* citrix closed source<br>
+* **citrix closed source VM windows tools**<br>
   [Link to download from citrix site](https://www.xenserver.com/downloads)<br>
-  `XenServer VM Tools for Windows 9.4.0` - was in January 2025
-* github open source version<br>
+  `XenServer VM Tools for Windows 9.4.0` - was in January 2025<br>
+  The **recommended go-to** way to get drivers and agent for windows VMs.
+* **xcpng open source VM windows tools**<br>
   [https://github.com/xcp-ng/win-pv-drivers/releases](https://github.com/xcp-ng/win-pv-drivers/releases)<br>
-  `XCP-ng Windows PV Tools 8.2.2.200-RC1` - as v9 seems still under development
+  `XCP-ng Windows PV Tools 8.2.2.200-RC1` - as v9 seems still under slow development.
 
-Theres also a VM option, to get driver through windows updates,
-but reading docs, it's just a driver and the VM still needs an agent,
-so why mix stuff or bother.
+Theres also a VM option, to get **the drivers** through **windows updates**,
+but reading the docs, it's just a driver and the VM **still needs the agent**,
+so you would still be installing agent... so it's not worth the bother.
 
-#### Linux
+---
+---
+
+</details>
+
+<details>
+<summary><h4>Linux</h4></summary>
 
 [The official docs.](https://docs.xcp-ng.org/vms/#%EF%B8%8F-guest-tools)
 
 Again, the linked docs tell well all the details.<br>
-For my go-to arch linux I just
+**The drivers** are in linux kernel, so one only needs the agent.
+
+For my go-to archlinux I just
 
 * `yay xe-guest-utilities-xcp-ng`
 * `sudo systemctl enable --now xe-linux-distribution.service`
 
-<details>
-<summary><h3>opnsense as a VM in xcpng</h3></summary>
+For occasianal debian install it's just as the docs say
 
-![tx-checksumming-off](https://i.imgur.com/brpHNA5.png)
-
-[The official docs.](https://docs.xcp-ng.org/guides/pfsense/)
-
-The most important bit of info is to disable `TX Checksum Offload`<br>
-[Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
-will be more detailed info on an example deployment.
+* XO comes with `XCPng-Tools` iso, mount that in to virtual dvd in General tab
+  of a VM
+* restart the VM
+* `sudo mount /dev/cdrom /mnt`
+* `sudo bash /mnt/Linux/install.sh`
+* reboot and unmount 
 
 ---
 ---
 
 </details>
-
-## Passthrough
-
-![passthrough-pic](https://i.imgur.com/nLNT9iH.gif)
-
-When you want to give a virtual machine direct full hardware access
-to some device.
-
-#### intel igpu passthrough
-
-* On the server host
-  * Home > Hosts > your_host > Advanced > PCI Devices<br>
-    Enable slidder next to VGA compatible controller
-  * Reboot the host, go check if the slider is on
-* On the Virtual Machine
-  * Home > VMs > your_VM > Advanced ><br>
-    At the end a button - `Attach PCIs`, there pick the igpu listed.
-
-In VM you can check with `lspci | grep -i vga`
-
-Tested with jellyfin and enabled transcoding,
-monitored with btop and intel_gpu_htop.
-
-<details>
-<summary><h5>The old way - cli passthrough</h5></summary>
-
-[Lawrence video.](https://www.youtube.com/watch?v=KIhyGvuCDcc)
-
-* ssh in on to xcpng host
-* `lspci -D` list the devices that can be passthrough
-* pick the device you want, note the HW address at the begining,
-  in this case it was `0000:00:02.0`
-* hide the device from the system<br>
-  `/opt/xensource/libexec/xen-cmdline --set-dom0 "xen-pciback.hide=(0000:00:02.0)"`
-  * be aware, the command is overrwriting the current blacklist,
-    so for multiple devices it would be<br>
-    `/opt/xensource/libexec/xen-cmdline --set-dom0 "xen-pciback.hide=(0000:00:02.0)(0000:00:01.0)"`
-* reboot the hypervisor
-* can use command `xl pci-assignable-list` to check device that can be passthrough    
-
----
----
-
-</details>
-
-#### amd igpu passthrough
-
-No luck so far.
-
-`udevadm info --query=all --name=/dev/dri/renderD128`<br>
-`dmesg | grep -i amdgpu` - if loaded correctly
 
 # Backups
 
@@ -636,6 +595,58 @@ Then in backup job settings
 
 # Advanced Concepts
 
+## Passthrough
+
+![passthrough-pic](https://i.imgur.com/nLNT9iH.gif)
+
+When you want to give a virtual machine direct full hardware access
+to some device.
+
+#### intel igpu passthrough
+
+* On the server host
+  * Home > Hosts > your_host > Advanced > PCI Devices<br>
+    Enable slidder next to VGA compatible controller
+  * Reboot the host, go check if the slider is on
+* On the Virtual Machine
+  * Home > VMs > your_VM > Advanced ><br>
+    At the end a button - `Attach PCIs`, there pick the igpu listed.
+
+In VM you can check with `lspci | grep -i vga`
+
+Tested with jellyfin and enabled transcoding,
+monitored with btop and intel_gpu_htop.
+
+<details>
+<summary><h5>The old way - cli passthrough</h5></summary>
+
+[Lawrence video.](https://www.youtube.com/watch?v=KIhyGvuCDcc)
+
+* ssh in on to xcpng host
+* `lspci -D` list the devices that can be passthrough
+* pick the device you want, note the HW address at the begining,
+  in this case it was `0000:00:02.0`
+* hide the device from the system<br>
+  `/opt/xensource/libexec/xen-cmdline --set-dom0 "xen-pciback.hide=(0000:00:02.0)"`
+  * be aware, the command is overrwriting the current blacklist,
+    so for multiple devices it would be<br>
+    `/opt/xensource/libexec/xen-cmdline --set-dom0 "xen-pciback.hide=(0000:00:02.0)(0000:00:01.0)"`
+* reboot the hypervisor
+* can use command `xl pci-assignable-list` to check device that can be passthrough    
+
+---
+---
+
+</details>
+
+#### amd igpu passthrough
+
+No luck so far.
+
+`udevadm info --query=all --name=/dev/dri/renderD128`<br>
+`dmesg | grep -i amdgpu` - if loaded correctly
+
+
 ## Pools
 
 ![pool-join-pic](https://i.imgur.com/jXaIqHb.png)
@@ -725,7 +736,7 @@ I plan to keep it simple.
 Various file types encountered.
 
 * `VDI` - Virtual Disk Storage - a concept, not an actual file type
-* `.vhd` - A file representing a virtual disk.
+* `.vhd` - A file representing a virtual disks and snapshots.
 * `.xva` - An archive of a VM, used for backups.
 * `.iso` - Bootable dvd image, usually for OS installation.
 
@@ -750,6 +761,22 @@ has a good article on these, especially with bit of history.
   the need for qemu for the emulation of hardware. Not yet really used.
 
 <details>
+<summary><h3>opnsense as a VM in xcpng</h3></summary>
+
+![tx-checksumming-off](https://i.imgur.com/brpHNA5.png)
+
+[The official docs.](https://docs.xcp-ng.org/guides/pfsense/)
+
+The most important bit of info is to disable `TX Checksum Offload`<br>
+[Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
+will be more detailed info on an example deployment.
+
+---
+---
+
+</details>
+
+<details>
 <summary><h1>Videos</h1></summary>
 
 [01-XO-lite-Deploy-XOA.mp4](https://github.com/user-attachments/assets/66fdb443-4218-4eb2-b07c-23a1e95d2830)
@@ -766,3 +793,4 @@ has a good article on these, especially with bit of history.
 ---
 
 </details>
+
