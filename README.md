@@ -190,7 +190,7 @@ An open source web-based centralized management platform for xcpng servers.
 Most non commercial users want to deploy XO which provides
 **full functionality while being free.**
 It can run either as a VM or a docker container. And either on the xcpng host
-or whatever other machine that can ping the host. The complication is that
+or any other machine that can ping the host. The complication is that
 **you need XO to deploy XO on to an xcpng host**.
 
 If you have a docker host or an another hypervisor it's trivial and quick.
@@ -311,7 +311,7 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
 
 </details> 
 
-XO deployments is an extra step compared to other hypervisors, but if you ever
+XO deployment is an extra step compared to other hypervisors, but if you ever
 get more servers this approach **starts to make sense** -  not thinking
 about running the management tool on the thing it manages. That the hosts are
 thought of as replaceable cogs in a bigger machine...<br>
@@ -321,7 +321,7 @@ types of deployments.
 #### Some aspects of XO
 
 * Once VMs are up and running, XO is not required for them to function. But you
-  **lose some functionality** if you would turn if off or disconnect.
+  **lose some functionality** if you would turn it off or disconnect.
   * **Backups schedule and their execution.**<br>
     XO is what manages backups, even the data of the VMs that are being backed up
     flow through the XO during a backup job if it's going to a network share.
@@ -508,8 +508,8 @@ For occasianal debian install it's just as the docs say
 
 ![backup-diagram](https://i.imgur.com/cFF1D5p.png)
 
-* [The official docs.](https://docs.xen-orchestra.com/backup)
-* [The official docs2.](https://docs.xcp-ng.org/management/backup/)
+* [The official docs](https://docs.xen-orchestra.com/backup) and
+  [the official docs2.](https://docs.xcp-ng.org/management/backup/)
 * [Lawrence Systems video.](https://youtu.be/weVoKm8kDb4)
 
 Backups are important enough that the official docs should be the main
@@ -519,6 +519,8 @@ Be aware - **Xen Orchestra is what schedules and executes backups.**<br>
 XO must be running with xcpng hosts, its not a fire and forget deployment.
 
 ### Backup Jobs Types
+
+At the moment I just played with rolling snapshots, backups, and delta backups.
 
 * VM Backup & Replication
   * **Rolling Snapshot**<br>
@@ -531,7 +533,8 @@ XO must be running with xcpng hosts, its not a fire and forget deployment.
     [CBT](https://xen-orchestra.com/blog/xen-orchestra-5-96/)
     \- Changed Block Tracking - a new way to do incremental backups
   * **Disaster Recovery**<br>
-    Full replication. Backup of the VM can be started immediately, no restoration.
+    Full replication. The backup of the VM can be started immediately,
+    no restoration.
   * **Continuous Replication**<br>
     Replication but through incremental changes.
 * VM Mirror Backup
@@ -552,15 +555,16 @@ will have nightly full backup,...
 #### Health check
 
 [Here's](https://youtu.be/A0HTRF3dhQE) Lawrence Systems video on backups
-that are automatically tested. The VM is restored at a host of choice,
+that are automatically tested. A VM is restored at a host of choice,
 booted without network and theres a check that guest tools agent starts.
-Afterwards this new restored VM is destroyed and health check is marked
-as success.
+If all that happens, the backup is marked as healthy and the VM is destroyed.
 
 #### Veeam Support
 
 [Seems](https://forums.veeam.com/veeam-backup-replication-f2/xcp-ng-support-t93030-60.html#p531802)
-theres a prototype and a praise of xen api from veeam devs.
+theres a prototype and a praise of xen api from veeam devs.<br>
+Though that does not mean the management will decide to create and support
+xen veeam edition.
 
 ### Remotes
 
