@@ -56,12 +56,13 @@ and the search for ESXi replacement started.
 
 ### Proxmox
 
-The absolute front runner, debian based, uses KVM for VMs, LXC for containers,
-native ZFS, native CEPH, **huge active community**, dozens of tech youtubers,
-a proven solution being out there for **20 years**. Made in Austria.<br>
+The absolute front runner candidate.
+Debian based, uses KVM for VMs, LXC for containers, native ZFS, native CEPH,
+**huge active community**, dozens of tech youtubers, a proven solution
+being out there for **20 years**. Made in Austria.<br>
 Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
 The thing is that I never felt drawn to it. Felt like I would be spending
-a lot of time learning the ins and outs to get the confidence I had with esxi.
+**a lot of time learning** the ins and outs to get the confidence I had with esxi.
 And while that's expected, it's still a chore, still an annoyance.<br>
 This made me want to stick longer with esxi and let proxmox cook,
 get few more major releases and improvements as vmware refuges start to give
@@ -88,7 +89,7 @@ And that apparently is what makes me enthusiastic about stuff.
   and it was just pushing a slider next to the igpu and a restart of the host
   and then in the VM's settings picking the igpu from a list.
 * Tried to deploy **opnsense** with a wan side and a lan side networks
-  and some win VM that would be only connected to the opnsense LAN side...
+  and some windows VM that would be only connected to the opnsense LAN side...
   and it also just straight up worked, no crowded complicated menus and settings,
   no spending lot of time investigating.
 * Tried **snapshots** and it was simple. Though they are simple in all
@@ -106,7 +107,7 @@ And that apparently is what makes me enthusiastic about stuff.
 The **webUI** of XO has a bit of an [amateurish vibe](https://i.imgur.com/yuUfUhp.png)
 compared to proxmox or esxi, but generally it's clean and simple.
 I like that often the info you see can be clicked and edited right then and there.
-That's how you change name, the number of cores, the ram, or enlarge disks.<br>
+That's how you change names, the number of cores, the ram, or enlarge disks.<br>
 They do work on [a new redesign](https://i.imgur.com/dqOSDsi.png)
 that reminds me of opnsense, which is good.
 
