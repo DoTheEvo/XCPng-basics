@@ -123,27 +123,28 @@ the experience there was **not as hurdle-free as that first time**.
 Theres now even [a chapter](#Issues-encountered) where I note issues
 I encounter. But still.. that first impression sold me on it pretty hard.
 
-<details open>
-<summary><h4>Hypervisors benchmarking.</h4></summary>
+<details>
+<summary><h3>Hypervisors Benchmarks</h3></summary>
 
 ![benchmark-symbols](https://i.imgur.com/cPmsLR8.png)
 
-Performance is not a deciding factor for me and I expect to be adequate with
-all of modern hyperviros.
+For me the performance is not a deciding factor and I expect it to be
+adequate with all of modern hyperviros.
 But since I am playing with these I can as well run some benchmarks.
 
-Test machine - ThinkCentre M75q Gen2; ryzen 4350GE; 16+4GB ram; 500GB sata ssd<br>
-VMs are win10 x64, at 8 cores 16GB ram<br>
-Tests are run 3 times, more if the results keep going up, highest value is noted.
+Test machine - ThinkCentre M75q Gen2; ryzen 4350GE; 16+4GB ram;
+128GB nvme oem ssd for OS, 500GB sata ssd for VMs<br>
+VMs are win10 x64, 8 cores 16GB ram<br>
+Tests are run 3+ times, the highest value is noted.
 
-* metal - nothing of note
-* xcpng - storage - ext Thin; guest drivers installed
+* metal - nothing of note, though it had 20GB or ram compared to VMs 16GB.
+* xcpng - storage is ext Thin; guest drivers installed.
 * proxmox - cpu - host; storage - [thin LVM](https://i.imgur.com/ZZvQjjm.png);
   virtio drivers installed; followed [this video](https://youtu.be/DnPUkqjvVPw)
-  for general setup
-* hyperv - nothing of note
+  for general setup.
+* hyperv - ram was not dynamic
 
-| win10 WM test     |   metal  | xcpng  | proxmox  | hyperv |
+| Win10 WM test     |   metal  | xcpng  | proxmox  | hyperv |
 |-------------------|----------|--------|----------|--------|
 | cinebench         |  [866](https://i.imgur.com/IEhqZ80.png) | [839](https://i.imgur.com/MT7fPcB.png) | [788](https://i.imgur.com/rpAEkht.png) | [776](https://i.imgur.com/r0FkoRS.png) |
 | geekbench         |  [1380 & 4780](https://browser.geekbench.com/v6/cpu/10098173) | [1306 & 4636](https://browser.geekbench.com/v6/cpu/10117642) | [1292 & 4213](https://browser.geekbench.com/v6/cpu/10112746) | [1283 & 4455](https://browser.geekbench.com/v6/cpu/10108799) |
@@ -155,24 +156,30 @@ Tests are run 3 times, more if the results keep going up, highest value is noted
 
 **Cinebench R15** is pretty clear cut. Was run several times on each, even with restarts.<br>
 **Geekbench** is nice that it gives a link to detailed results,
-has some note about timers with proxmox.<br>
+has some note about an issue with timers with proxmox.<br>
 **Cristal disk mark** shows pretty big differences, picked random read
 as the important value for the table.
-**HDtune** has some cashing going on hyperv and xcpng, hence high sequentials
-that are better than metal.<br>
+**HDtune** Burst speed was picked fo the table. There also was some cashing going
+on hyperv and xcpng, hence after a while sequentials higher than metal.<br>
 **iperf** would be more interesting if 2.5gbit or 10gbit nic, maybe there be some
 difference.<br>
 **DPC latency** test is probably worthless, but of note is that the very first
 measurment on proxmox had [better values](https://i.imgur.com/43Rw6YH.png)
 than metal, but I could not replicate it with later runs.<br>
 
-Also of note - performance of windows in a VM is not indicative of a performance
-of linux virtual machines.
+Likely the performance can be tweaked and improved on some, but I am fine with
+xcpng performance so its nice to not needing to bother.<br>
+Also of note - the performance of windows in a VM is not indicative of a performance
+of linux virtual machines, but I dont feel like doing linux, it would be
+probably geekbench + fio and I hate dealing with fio test configs and results.
+
+---
+---
 
 </details>
 
 <details>
-<summary><h4>Links of some informative value.</h4></summary>
+<summary><h3>Links of some informative value.</h3></summary>
 
 * [gyptazy - XCP-ng - A More Professional Alternative to Proxmox Based on Xen](https://gyptazy.com/xcp-ng-a-more-professional-alternative-to-proxmox-based-on-xen/)<br>
   xcpng loses or just keeps up in performance tests and theres
@@ -187,7 +194,8 @@ of linux virtual machines.
   a reddit post about why the op prefers xcpng, bit of drama in the comments
   arguing type 1 vs type 2 hypervisors
 
-</details>
+---
+---
 
 </details>
 
