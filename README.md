@@ -10,13 +10,14 @@
 4. [The Basics](#The-Basics)
 5. [Backups](#Backups)
 6. [Advanced Concepts](#Advanced-Concepts)
-7. [Videos](#Videos)
+7. [Issues encountered](#Issues-encountered)
+8. [Videos](#Videos)
 
 # Purpose & Overview
 
 A virtualization platform build around
 **Xen a type 1 hypervisor**.<br>
-An alternative to esxi or proxmox.
+An alternative to ESXi or Proxmox.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
 is an open source project, developed under **the Linux Foundation** with
@@ -38,7 +39,7 @@ and have \~40 employees.
   This is what you install on the metal.
 * **XO** - Xen Orchestra - a web interface for centralized management
   of xcpng hosts.<br>
-  Usually deployed as a container or a virtual machine.
+  Deployed as a container or a virtual machine.
 * **XOA** - Xen Orchestra Appliance - a paid version of XO with full support
   and some extra features like [XOSTOR](https://vates.tech/xostor/)
   through webGUI.
@@ -46,7 +47,7 @@ and have \~40 employees.
   a community project. Was abandonware but it has a new
   [maintainer](https://github.com/xcp-ng/xenadmin).
 
-<details>
+<details open>
 <summary><H1>Why XCP-ng</H1></summary>
 
 ![vs-proxmox](https://i.imgur.com/gLHHxOk.png)
@@ -119,31 +120,30 @@ stable and I am just glad that I did not find bunch of complains about instabili
  
 Now, since that first try I installed xcpng on a few more machines and
 the experience there was **not as hurdle-free as that first time**.
-But still.. that first impression sold me on it pretty hard.
+Theres now even [a chapter](#Issues-encountered) where I note issues
+I encounter. But still.. that first impression sold me on it pretty hard.
 
-<details>
-<summary><h4>Problems encountered.</h4></summary>
+<details open>
+<summary><h4>Own benchmarks.</h4></summary>
 
-* **A VM with "Generic Linux UEFI" preset 
-  [failed to boot from arch ISO](https://i.imgur.com/cnnlBtJ.png)**<br>
-  Weird issue. Seems the cause is that the ISO SR was created in `/media`
-  on the boot drive which was a small OEM nvme ssd that came with that miniPC.
-  The thing is that I had 3 lenovo miniPCs at that time and every single
-  one of them had this issue. Debian 12 ISO and template also had that issue.<br>
-  Any change to the setup **solved the problem**.
-  Replacing the ssd with a larger brand-name nvme ssd;
-  creating ISO SR on a different drive; switch to a sata ssd;
-  using nfs share for ISOs; switching to bios;...<br>
-  Probably some weird quirk with uefi and ext3 and a small nvme ssd or something.
-* igpu **passthrough** of ryzen 4350GE is not working at all, ThinkCentre M75q Gen 2.
-* igpu **passthrough** of i5-8400T had a poor performance, ThinkCentre M720q.<br>
-  I am starting to wonder if my initial test with i3-9100 of the passthrough
-  really worked as well as I remember it working.<br>
-  Will keep testing when I get some intel based machines in hands as right
-  now I got none.
+Test machine - ThinkCentre M75q Gen2; ryzen 4350GE; 16+4GB ram; 500GB sata ssd<br>
+VMs are win10, at 4 cores 8GB ram<br>
+cpu test is run several times and the highest recorded value is noted
+
+| win10 test | cinebench | crystaldiskmark | geekbench |
+|------------|-----------|----------|-----------------|
+| metal      |  [866](https://i.imgur.com/NCBVwl6.png) | [40](https://i.imgur.com/A2QntCE.png) | [1375 & 4464](https://browser.geekbench.com/v6/cpu/9796505)
+| xcpng      |  [584](https://i.imgur.com/QbCTuIe.png) | [22](https://i.imgur.com/Qzy6egt.png) | [1305 & 3890](https://browser.geekbench.com/v6/cpu/9816227)
+| proxmox    |  [578](https://i.imgur.com/q4rYfZy.png) | [18](https://i.imgur.com/TTIjpvO.png) | [1350 & 3782](https://browser.geekbench.com/v6/cpu/9799619)
+| hyperv     |  [578](https://i.imgur.com/q4rYfZy.png) | [18](https://i.imgur.com/TTIjpvO.png) | [1350 & 3782](https://browser.geekbench.com/v6/cpu/9799619)
+
+metal, oem lenovo nvme, 4350GE, ThinkCentre M75q
+metal, mx500 sata, 4350GE, ThinkCentre M75q
+xcpng, mx500 sata, 4350GE, ThinkCentre M75q
+proxmox, mx500 sata, 4350GE, ThinkCentre M75q
+hyperv, mx500 sata, 4350GE, ThinkCentre M75q
 
 </details>
-
 
 <details>
 <summary><h4>Links of some informative value.</h4></summary>
@@ -162,6 +162,9 @@ But still.. that first impression sold me on it pretty hard.
   arguing type 1 vs type 2 hypervisors
 
 </details>
+
+</details>
+
 
 ---
 ---
@@ -195,15 +198,9 @@ It can run either as a VM or a docker container. And either on the xcpng host
 or any other machine that can ping the host. The complication is that
 **you need XO to deploy XO on to an xcpng host**.
 
-If you have a docker host or an another hypervisor it's trivial and quick.
-
-* Copy paste **docker compose**, run the container. Done.<br>
-  Details in the docker section below.
-* Spin up a **new debian virtual machine**,
-  run [xcpng install script](https://github.com/ronivay/XenOrchestraInstallerUpdater).
-  Done.<br>
-  [The actual commands.](https://pastebin.com/raw/xi1dZVwQ)
-  Some discussion [here.](https://forums.lawrencesystems.com/t/how-to-build-xen-orchestra-from-sources-2024/19913)
+* **docker container** - the most trivial and quick deployment.
+* **virtual machine** - there's extra work of spinning up a new debian VM.
+* **VM on the xcpng itself** - there's additional extra work of using XOA first.
 
 <details>
 <summary><h3>XO in Docker</h3></summary>
@@ -279,12 +276,40 @@ xo.{$MY_DOMAIN} {
 ---
 ---
 
-</details>  
+</details>
+
+<details>
+<summary><h3>XO in a VM</h3></summary>
+
+![debian-logo](https://i.imgur.com/d732Me7.png)
+
+If you got an another server with a hypervisor, or if you on your desktop
+run a virtualbox or a hyperv, or for the final VM deployment of XO on xcpng...
+
+* Spin up a **new debian virtual machine**, click through the regular install.
+* **clone the github repo** with the install script<br>
+  `git clone https://github.com/ronivay/XenOrchestraInstallerUpdater.git`
+* go inside<br>
+  `cd XenOrchestraInstallerUpdater`
+* make a copy of the **sample config**.<br>
+  `cp sample.xo-install.cfg xo-install.cfg`
+* **run the install script**<br>
+  `sudo ./xo-install.sh`
+
+More discussion about the process
+[here.](https://forums.lawrencesystems.com/t/how-to-build-xen-orchestra-from-sources-2024/19913)
+
+---
+---
+
+</details>   
 
 <details>
 <summary><h3>XO on XCPng itself</h3></summary>
 
 ![web-install](https://i.imgur.com/HFwezjG.png)
+
+*Note:* **the videos** showcasing the process are in [the last chapter](#Videos).
 
 The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
 
@@ -305,8 +330,6 @@ The easiest way is to **first deploy the paid XOA** and use that to deploy XO.
       as a container there
     * **add xcpng host** as a server in to the XO
     * delete XOA virtual machine
-
-**The videos** showcasing the process are in [the last chapter](#Videos).    
 
 ---
 ---
@@ -466,6 +489,7 @@ The above linked official docs tell well the details.
   [Link to download from citrix site](https://www.xenserver.com/downloads)<br>
   `XenServer VM Tools for Windows 9.4.0` - was in January 2025<br>
   The **recommended go-to** way to get drivers and agent for windows VMs.
+  During install it asks if **automatic updates** for agent and drivers.
 * **xcpng open source VM windows tools**<br>
   [https://github.com/xcp-ng/win-pv-drivers/releases](https://github.com/xcp-ng/win-pv-drivers/releases)<br>
   `XCP-ng Windows PV Tools 8.2.2.200-RC1` - as v9 seems still under slow development.
@@ -652,6 +676,7 @@ monitored with btop and intel_gpu_htop.
 No luck so far.
 
 `udevadm info --query=all --name=/dev/dri/renderD128`<br>
+`lspci -vvv -s 00:08.0` - "00:08.0" being physical address shown in the udevadm
 `dmesg | grep -i amdgpu` - if loaded correctly
 
 
@@ -775,6 +800,26 @@ has a good article on these, especially with bit of history.
 * **PVH** - Paravirtualization-on-HVM<br>
   Further performance improvements and reduced complexity. Completely drops
   the need for qemu for the emulation of hardware. Not yet really used.
+
+# Issues encountered
+
+* **A VM with "Generic Linux UEFI" preset 
+  [failed to boot from arch ISO](https://i.imgur.com/cnnlBtJ.png)**<br>
+  Weird issue. Seems the cause is that the ISO SR was created in `/media`
+  on the boot drive which was a small OEM nvme ssd that came with that miniPC.
+  The thing is that I had 3 lenovo miniPCs at that time and every single
+  one of them had this issue. Debian 12 ISO and template also had that issue.<br>
+  Any change to the setup **solved the problem**.
+  Replacing the ssd with a larger brand-name nvme ssd;
+  creating ISO SR on a different drive; switch to a sata ssd;
+  using nfs share for ISOs; switching to bios;...<br>
+  Probably some weird quirk with uefi and ext3 and a small nvme ssd or something.
+* igpu **passthrough** of ryzen 4350GE is not working at all, ThinkCentre M75q Gen 2.
+* igpu **passthrough** of i5-8400T had a poor performance, ThinkCentre M720q.<br>
+  I am starting to wonder if my initial test with i3-9100 of the passthrough
+  really worked as well as I remember it working.<br>
+  Will keep testing when I get some intel based machines in hands as right
+  now I got none.
 
 <details>
 <summary><h1>Videos</h1></summary>
