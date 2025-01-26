@@ -120,7 +120,7 @@ stable and I am just glad that I did not find bunch of complains about instabili
  
 Now, since that first try I installed xcpng on a few more machines and
 the experience there was **not as hurdle-free as that first time**.
-Theres now even [a chapter](#Issues-encountered) where I note issues
+There's now [a chapter](#Issues-encountered) where I note issues
 I encounter. But still.. that first impression sold me on it pretty hard.
 
 <details>
@@ -138,7 +138,7 @@ VMs are win10 x64, 8 cores 16GB ram<br>
 Tests are run 3+ times, the highest value is noted.
 
 * metal - nothing of note, though it had 20GB or ram compared to VMs 16GB.
-* xcpng - storage is ext Thin; guest drivers installed.
+* xcpng - storage is ext thin; the guest drivers installed.
 * proxmox - cpu - host; storage - [thin LVM](https://i.imgur.com/ZZvQjjm.png);
   virtio drivers installed; followed [this video](https://youtu.be/DnPUkqjvVPw)
   for general setup.
@@ -163,14 +163,15 @@ as the important value for the table.
 on hyperv and xcpng, hence after a while sequentials higher than metal.<br>
 **iperf** would be more interesting if 2.5gbit or 10gbit nic, maybe there be some
 difference.<br>
-**DPC latency** test is probably worthless, but of note is that the very first
+**DPC latency** test is probably worthless but it's maybe a check if there is
+not some weird slowness going on, but all passed. Of note is that the very first
 measurment on proxmox had [better values](https://i.imgur.com/43Rw6YH.png)
 than metal, but I could not replicate it with later runs.<br>
 
 Likely the performance can be tweaked and improved on some, but I am fine with
 xcpng performance so its nice to not needing to bother.<br>
-Also of note - the performance of windows in a VM is not indicative of a performance
-of linux virtual machines, but I dont feel like doing linux, it would be
+Also of note - the performance of a windows VM,
+**is not indicative of a performance of a linux VM**, but I dont feel like doing linux, it would be
 probably geekbench + fio and I hate dealing with fio test configs and results.
 
 ---
