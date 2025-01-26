@@ -128,8 +128,9 @@ I encounter. But still.. that first impression sold me on it pretty hard.
 
 ![benchmark-symbols](https://i.imgur.com/Xq7UQ7b.png)
 
-Performance is not a deciding factor for me, but since I am playing with these
-I can as well run some benchmarks.
+Performance is not a deciding factor for me and I expect to be adequate with
+all of modern hyperviros.
+But since I am playing with these I can as well run some benchmarks.
 
 Test machine - ThinkCentre M75q Gen2; ryzen 4350GE; 16+4GB ram; 500GB sata ssd<br>
 VMs are win10 x64, at 8 cores 16GB ram<br>
@@ -152,9 +153,21 @@ Tests are run 3 times, more if the results keep going up, highest value is noted
 | latency           |  [pass](https://i.imgur.com/V1eExDx.png) | [pass](https://i.imgur.com/iZePi1s.png) | [pass](https://i.imgur.com/ireTL7T.png) | [pass](https://i.imgur.com/9J2VRqP.png) |
 | setup overview    |  [info](https://i.imgur.com/qxF8QdT.png) | [info](https://i.imgur.com/aFlVPyP.png) | [info](https://i.imgur.com/t2QBxaj.png) | [info](https://i.imgur.com/2Ip3Blv.png) |
 
-HDtune has some cashing going on hyperv and proxmox, latency test is probably
-worthless, iperf would be more interesting if 2.5gbit or 10gbit card.<br>
-Also performance of windows is not indicative of a performance of linux.
+**Cinebench R15** is pretty clear cut. Was run several times on each, even with restarts.<br>
+**Geekbench** is nice that it gives a link to detailed results,
+has some note about timers with proxmox.<br>
+**Cristal disk mark** shows pretty big differences, picked random read
+as the important value for the table.
+**HDtune** has some cashing going on hyperv and xcpng, hence high sequentials
+that are better than metal.<br>
+**iperf** would be more interesting if 2.5gbit or 10gbit nic, maybe there be some
+difference.<br>
+**DPC latency** test is probably worthless, but of note is that the very first
+measurment on proxmox had [better values](https://i.imgur.com/43Rw6YH.png)
+than metal, but I could not replicate it with later runs.<br>
+
+Also of note - performance of windows in a VM is not indicative of a performance
+of linux virtual machines.
 
 </details>
 
