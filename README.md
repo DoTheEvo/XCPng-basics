@@ -126,7 +126,7 @@ I encounter. But still.. that first impression sold me on it pretty hard.
 <details open>
 <summary><h4>Hypervisors benchmarking.</h4></summary>
 
-![benchmark-symbols](https://i.imgur.com/Xq7UQ7b.png)
+![benchmark-symbols](https://i.imgur.com/cPmsLR8.png)
 
 Performance is not a deciding factor for me and I expect to be adequate with
 all of modern hyperviros.
