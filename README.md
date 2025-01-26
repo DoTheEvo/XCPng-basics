@@ -124,24 +124,37 @@ Theres now even [a chapter](#Issues-encountered) where I note issues
 I encounter. But still.. that first impression sold me on it pretty hard.
 
 <details open>
-<summary><h4>Own benchmarks.</h4></summary>
+<summary><h4>Hypervisors benchmarking.</h4></summary>
+
+![benchmark-symbols](https://i.imgur.com/Xq7UQ7b.png)
+
+Performance is not a deciding factor for me, but since I am playing with these
+I can as well run some benchmarks.
 
 Test machine - ThinkCentre M75q Gen2; ryzen 4350GE; 16+4GB ram; 500GB sata ssd<br>
-VMs are win10, at 4 cores 8GB ram<br>
-cpu test is run several times and the highest recorded value is noted
+VMs are win10 x64, at 8 cores 16GB ram<br>
+Tests are run 3 times, more if the results keep going up, highest value is noted.
 
-| win10 test | cinebench | crystaldiskmark | geekbench |
-|------------|-----------|----------|-----------------|
-| metal      |  [866](https://i.imgur.com/NCBVwl6.png) | [40](https://i.imgur.com/A2QntCE.png) | [1375 & 4464](https://browser.geekbench.com/v6/cpu/9796505)
-| xcpng      |  [584](https://i.imgur.com/QbCTuIe.png) | [22](https://i.imgur.com/Qzy6egt.png) | [1305 & 3890](https://browser.geekbench.com/v6/cpu/9816227)
-| proxmox    |  [578](https://i.imgur.com/q4rYfZy.png) | [18](https://i.imgur.com/TTIjpvO.png) | [1350 & 3782](https://browser.geekbench.com/v6/cpu/9799619)
-| hyperv     |  [578](https://i.imgur.com/q4rYfZy.png) | [18](https://i.imgur.com/TTIjpvO.png) | [1350 & 3782](https://browser.geekbench.com/v6/cpu/9799619)
+* metal - nothing of note
+* xcpng - storage - ext Thin; guest drivers installed
+* proxmox - cpu - host; storage - [thin LVM](https://i.imgur.com/ZZvQjjm.png);
+  virtio drivers installed; followed [this video](https://youtu.be/DnPUkqjvVPw)
+  for general setup
+* hyperv - nothing of note
 
-metal, oem lenovo nvme, 4350GE, ThinkCentre M75q
-metal, mx500 sata, 4350GE, ThinkCentre M75q
-xcpng, mx500 sata, 4350GE, ThinkCentre M75q
-proxmox, mx500 sata, 4350GE, ThinkCentre M75q
-hyperv, mx500 sata, 4350GE, ThinkCentre M75q
+| win10 WM test     |   metal  | xcpng  | proxmox  | hyperv |
+|-------------------|----------|--------|----------|--------|
+| cinebench         |  [866](https://i.imgur.com/IEhqZ80.png) | [839](https://i.imgur.com/MT7fPcB.png) | [788](https://i.imgur.com/rpAEkht.png) | [776](https://i.imgur.com/r0FkoRS.png) |
+| geekbench         |  [1380 & 4780](https://browser.geekbench.com/v6/cpu/10098173) | [1306 & 4636](https://browser.geekbench.com/v6/cpu/10117642) | [1292 & 4213](https://browser.geekbench.com/v6/cpu/10112746) | [1283 & 4455](https://browser.geekbench.com/v6/cpu/10108799) |
+| cristal disk mark |  [41](https://i.imgur.com/3Zniq7s.png) | [22](https://i.imgur.com/g3RbjPQ.png) | [17](https://i.imgur.com/W7qcUf1.png) | [18](https://i.imgur.com/oIWXGMh.png) |
+| hdtune            |  [177](https://i.imgur.com/gJFvYsD.png) | [144](https://i.imgur.com/eT9IJVN.png) | [87](https://i.imgur.com/IUooK1t.png) | [113](https://i.imgur.com/70rHbiE.png) |
+| iperf             |  [pass](https://i.imgur.com/Clj2PWF.png) | [pass](https://i.imgur.com/c0c51CR.png) | [pass](https://i.imgur.com/sxvxWAU.png) | [pass](https://i.imgur.com/XiM3zVh.png) |
+| latency           |  [pass](https://i.imgur.com/V1eExDx.png) | [pass](https://i.imgur.com/iZePi1s.png) | [pass](https://i.imgur.com/ireTL7T.png) | [pass](https://i.imgur.com/9J2VRqP.png) |
+| setup overview    |  [info](https://i.imgur.com/qxF8QdT.png) | [info](https://i.imgur.com/aFlVPyP.png) | [info](https://i.imgur.com/t2QBxaj.png) | [info](https://i.imgur.com/2Ip3Blv.png) |
+
+HDtune has some cashing going on hyperv and proxmox, latency test is probably
+worthless, iperf would be more interesting if 2.5gbit or 10gbit card.<br>
+Also performance of windows is not indicative of a performance of linux.
 
 </details>
 
@@ -164,7 +177,6 @@ hyperv, mx500 sata, 4350GE, ThinkCentre M75q
 </details>
 
 </details>
-
 
 ---
 ---
