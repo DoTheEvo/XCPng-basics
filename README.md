@@ -849,6 +849,9 @@ has a good article on these, especially with bit of history.
 <details>
 <summary><h1>Videos</h1></summary>
 
+How to deploy XOA on a freshly installed xcpng host and then using XOA
+to deploy debian VM and run script that installs XO.
+
 [01-XO-lite-Deploy-XOA.mp4](https://github.com/user-attachments/assets/66fdb443-4218-4eb2-b07c-23a1e95d2830)
 
 [02-XOA-firstlogin-new-vm.mp4](https://github.com/user-attachments/assets/b3d5083c-be5b-4cad-bae9-834626a15346)
