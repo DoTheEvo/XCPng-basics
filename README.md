@@ -123,7 +123,7 @@ the experience there was **not as hurdle-free as that first time**.
 There's now [a chapter](#Issues-encountered) where I note issues
 I encounter. But still.. that first impression sold me on it pretty hard.
 
-<details>
+<details open>
 <summary><h3>Hypervisors Benchmarks</h3></summary>
 
 ![benchmark-symbols](https://i.imgur.com/cPmsLR8.png)
@@ -173,27 +173,6 @@ xcpng performance so its nice to not needing to bother.<br>
 Also of note - the performance of a windows VM,
 **is not indicative of a performance of a linux VM**, but I dont feel like doing linux, it would be
 probably geekbench + fio and I hate dealing with fio test configs and results.
-
----
----
-
-</details>
-
-<details>
-<summary><h3>Links of some informative value.</h3></summary>
-
-* [gyptazy - XCP-ng - A More Professional Alternative to Proxmox Based on Xen](https://gyptazy.com/xcp-ng-a-more-professional-alternative-to-proxmox-based-on-xen/)<br>
-  xcpng loses or just keeps up in performance tests and theres
-  focus on poorer hardware support of xcpng
-* [xda-developers - Proxmox vs. XCP-ng: Which one's better for your home lab?](https://www.xda-developers.com/proxmox-vs-xcp-ng/)<br>
-  generic head to head comparison, with proxmox being awarded the best for homelab
-* [youtube - 45Drives - Proxmox VE v.s. XCP-ng: A Live Discussion with Tom Lawrence](https://www.youtube.com/live/3UHE-6bOoK8)<br>
-  lengthy video, good natured back and forth showcasing advanced features of both
-* [youtube -  2GuysTek - Life After VMware - A summary and comparison of hypervisors!](https://youtu.be/eQgzITx1Sp8)<br>
-  a summary video in a series about hypervisors, his pick in the end is proxmox
-* [reddit - My personal impressions on Proxmox vs XCP-ng](https://www.reddit.com/r/homelab/comments/12j0rry/my_personal_impressions_on_proxmox_vs_xcpng/)<br>
-  a reddit post about why the op prefers xcpng, bit of drama in the comments
-  arguing type 1 vs type 2 hypervisors
 
 ---
 ---
@@ -665,14 +644,17 @@ Then in backup job settings
 
 ![passthrough-pic](https://i.imgur.com/nLNT9iH.gif)
 
-When you want to give a virtual machine direct full hardware access
-to some device.
+When you want to give a virtual machine **direct full hardware access**
+to some device.<br>
+Be aware that once passthrough is setup it's tight to hardware addresses and
+hardware changes first **require disabling the passthrough**, or your xpcng
+might not boot or devices might be stuck hidden.
 
 #### intel igpu passthrough
 
 * On the server host
   * Home > Hosts > your_host > Advanced > PCI Devices<br>
-    Enable slidder next to VGA compatible controller
+    Enable slider next to VGA compatible controller
   * Reboot the host, go check if the slider is on
 * On the Virtual Machine
   * Home > VMs > your_VM > Advanced ><br>
@@ -723,7 +705,10 @@ Pools remove some duplicitous effort when setting up shared storage, or networks
 or backups.
 Allow for easier/faster live migration of VMs or for automatic load balancing.
 Safer updates of the hosts and easier scale up of the compute power by
-adding more hosts.
+adding more hosts.<br>
+To join a pool, the hosts must have similar CPU,
+for examle you can no mix amd and intel, but not sure how similar till you
+get message - *"Failed: The hosts in this pool are not homogeneous. CPUs differ."*
 
 * All hosts are masters in their own pool, **pick one** that will be the master<br>
   **rename it's pool** to something more specific
