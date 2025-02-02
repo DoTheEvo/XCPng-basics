@@ -124,7 +124,7 @@ There's now [a chapter](#Issues-encountered) where I note issues
 I encounter. But still.. that first impression sold me on it pretty hard.
 
 <details open>
-<summary><h3>Hypervisors Benchmarks</h3></summary>
+<summary><h2>Hypervisors Benchmarks</h2></summary>
 
 ![benchmark-symbols](https://i.imgur.com/cPmsLR8.png)
 
