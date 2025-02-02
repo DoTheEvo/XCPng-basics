@@ -174,9 +174,6 @@ Also of note - the performance of a windows VM,
 **is not indicative of a performance of a linux VM**, but I dont feel like doing linux, it would be
 probably geekbench + fio and I hate dealing with fio test configs and results.
 
----
----
-
 </details>
 
 ---
