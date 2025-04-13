@@ -47,7 +47,7 @@ and have \~40 employees.
   a community project. Was abandonware but it has a new
   [maintainer](https://github.com/xcp-ng/xenadmin).
 
-<details>
+<details open>
 <summary><H1>Why XCP-ng</H1></summary>
 
 ![vs-proxmox](https://i.imgur.com/gLHHxOk.png)
