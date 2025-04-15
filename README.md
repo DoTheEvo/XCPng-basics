@@ -31,7 +31,7 @@ is the biggest xen user.
 as a fork of XenServer, which with version 7.0 closed-source some of it's components.
 The first release came out in 2018, but Vates - the company behind it,
 worked on Xen Orchestra since 2012. They are located in France
-and have \~40 employees.
+and have \~90 employees.
 
 * **Xen** - The hypervisor.
 * **XCPng** - A single purpose linux distro preconfigured with xen,
