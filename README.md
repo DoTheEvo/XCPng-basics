@@ -17,7 +17,7 @@
 
 A virtualization platform build around
 **Xen a type 1 hypervisor**.<br>
-An alternative to ESXi or Proxmox.
+An alternative to Proxmox or ESXi/vCenter.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
 is an open source project, developed under **the Linux Foundation** with
@@ -66,7 +66,7 @@ The thing is that I never felt drawn to it. Felt like I would be spending
 **a lot of time learning** the ins and outs to get the confidence I had with esxi.
 And while that's expected, it's still a chore, still an annoyance.<br>
 This made me want to stick longer with esxi and let proxmox cook,
-get few more major releases and improvements as vmware refuges start to give
+get few more major releases and improvements as VMware refuges start to give
 feedback and money.
   
 ### XCPng 
@@ -194,7 +194,8 @@ probably geekbench + fio and I hate dealing with fio test configs and results.
 [Github.](https://github.com/vatesfr/xen-orchestra)<br>
 [Ronivay's install script.](https://github.com/ronivay/XenOrchestraInstallerUpdater)
 
-An open source web-based centralized management platform for xcpng servers.
+An open source web-based centralized management platform for xcpng servers.<br>
+Something like vCenter in the VMware world.
 
 * **XO** - Xen Orchestra - Free version compiled from the source.
 * **XOA** - Xen Orchestra Appliance - Paid version. Functional in free mode
