@@ -833,14 +833,15 @@ has a good article on these, especially with bit of history.
   creating ISO SR on a different drive; switch to a sata ssd;
   using nfs share for ISOs; switching to bios;...<br>
   Probably some weird quirk with uefi and ext3 and a small nvme ssd or something.
-* igpu **passthrough** of ryzen 4350GE is not working at all, ThinkCentre M75q Gen 2.
-* igpu **passthrough** of i5-8400T had a poor performance, ThinkCentre M720q.<br>
+* igpu **passthrough**
+  * ryzen **4350GE** is not working at all, ThinkCentre M75q Gen 2.
+  * **i5-8400T** had poor performance, ThinkCentre M720q.<br>
   I am starting to wonder if my initial test with i3-9100 of the passthrough
   really worked as well as I remember it working.<br>
   Will keep testing when I get some intel based machines in hands as right
   now I got none.
-* igpu **passthrough** update, got for OptiPlex 3080 with i3-10105T<br>
-  tested passthrough and it worked straight up without a hitch transcoding 8 streams.
+  * **i3-10105T** in an OptiPlex 3080.<br>
+    Passthrough worked straight up without a hitch transcoding 8 streams.
 
 <details>
 <summary><h1>Videos</h1></summary>
