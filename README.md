@@ -838,8 +838,7 @@ has a good article on these, especially with bit of history.
   * **i5-8400T** had poor performance, ThinkCentre M720q.<br>
   I am starting to wonder if my initial test with i3-9100 of the passthrough
   really worked as well as I remember it working.<br>
-  Will keep testing when I get some intel based machines in hands as right
-  now I got none.
+  Will keep testing as I get hands on some other machines.
   * **i3-10105T** in an OptiPlex 3080.<br>
     Passthrough worked straight up without a hitch transcoding 8 streams.
 
