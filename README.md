@@ -567,8 +567,10 @@ At the moment I just played with rolling snapshots, backups, and delta backups.
     Full size every time, so lot of space, bandwidth and time is used.
   * **Delta Backup**<br>
     Incremental backups of only changes against the initial full back<br>
-    [CBT](https://xen-orchestra.com/blog/xen-orchestra-5-96/)
-    \- Changed Block Tracking - a new way to do incremental backups
+    * [CBT](https://xen-orchestra.com/blog/xen-orchestra-5-96/)
+    \- Changed Block Tracking<br>
+    a new and a better way to do incremental backups,
+    but its not yet battle tested.
   * **Disaster Recovery**<br>
     Full replication. The backup of the VM can be started immediately,
     no restoration.
@@ -837,6 +839,8 @@ has a good article on these, especially with bit of history.
   really worked as well as I remember it working.<br>
   Will keep testing when I get some intel based machines in hands as right
   now I got none.
+* igpu **passthrough** update, got for OptiPlex 3080 with i3-10105T<br>
+  tested passthrough and it worked straight up without a hitch transcoding 8 streams.
 
 <details>
 <summary><h1>Videos</h1></summary>
