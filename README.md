@@ -159,7 +159,7 @@ Tests are run 3+ times, the highest value is noted.
 has some note about an issue with timers with proxmox.<br>
 **Cristal disk mark** shows pretty big differences, picked random read
 as the important value for the table.
-**HDtune** Burst speed was picked fo the table. There also was some cashing going
+**HDtune** Burst speed was picked for the table. There also was some cashing going
 on hyperv and xcpng, hence after a while sequentials higher than metal.<br>
 **iperf** would be more interesting if 2.5gbit or 10gbit nic, maybe there be some
 difference.<br>
@@ -173,6 +173,11 @@ xcpng performance so its nice to not needing to bother.<br>
 Also of note - the performance of a windows VM,
 **is not indicative of a performance of a linux VM**, but I dont feel like doing linux, it would be
 probably geekbench + fio and I hate dealing with fio test configs and results.
+
+*Experience* - Had to virtualize opnsense on a MSI cubi miniPC because broadcom NICs
+and freebsd driver for non-intel NICs being terrible.
+XCPng network throughput was bad, like 50 vs 300 Mbits.
+Had to go proxmox for that case.
 
 </details>
 
@@ -383,6 +388,8 @@ instructions too.
 After reboot, we are shown the basic info menu, similar to esxi but better.
 I really like the look with all the info and all the functionality.
 This menu can be open even when SSH in, with `xsconsole` command.
+
+Maybe now it's a good time to set **static IP** address for this xcpng host.
 
 ![xcpng-console-menu](https://i.imgur.com/Iu0bdmh.png)
 
@@ -771,11 +778,36 @@ scrape_configs:
 
 </details>
 
+## Networking and VLANs in XO
+
+* [The official docs](https://docs.xcp-ng.org/networking/)
+* [VLAN trunking](https://docs.xcp-ng.org/guides/VLAN-trunking-vm/)
+* Lawrence Systems - [video1](https://youtu.be/z-cSXuQgDrk); [video2](https://youtu.be/H5PJ_tHQlZk)
+
+Reading the official docs is a must.<br>
+But some highlights
+
+* A network is basicly a virtual switch.
+* You want to set up networking in the `pool` not on the `host`
+* For simple vlans you create a new network named whatever, add it vlan tag.<br>
+  Thats it, now you can change the network in a VM's network 
+
+
+
+
+
+
+
+
 ## opnsense or pfsense as a VM in xcpng
 
 ![tx-checksumming-off](https://i.imgur.com/brpHNA5.png)
 
 [The official docs.](https://docs.xcp-ng.org/guides/pfsense/)
+
+Read the above docs.<br>
+
+The hihglight is to use UEFI boot to avoid potentially longer boot times.
 
 **The most important** bit of info is to **disable TX Checksum Offload**<br>
 [Here](https://github.com/DoTheEvo/selfhosted-apps-docker/tree/master/opnsense#xcp-ng)
