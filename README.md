@@ -179,9 +179,9 @@ Also of note - the performance of a windows VM,
 probably geekbench + fio and I hate dealing with fio test configs and results.
 
 * *Later experience* - Had MSI cubi miniPC and I planed to install opnsense
-straight on metal, but there were issues and I thought because of realcom NICs
+straight on metal, but there were issues and I thought because of realtek NICs
 and freeBSD of opnsense combo... so virtualization time...<br>
-XCPng had terrible throughput of \~50Mbit, Proxmox with virtio managed \~300Mbit.
+XCPng had terrible throughput of \~50Mbit, Proxmox with virtio managed full \~300Mbit.
 
 </details>
 
