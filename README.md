@@ -178,10 +178,10 @@ Also of note - the performance of a windows VM,
 **is not indicative of a performance of a linux VM**, but I dont feel like doing linux, it would be
 probably geekbench + fio and I hate dealing with fio test configs and results.
 
-* *Later experience* - Had MSI cubi miniPC and I planed to install opnsense
-straight on metal, but there were issues and I thought because of realtek NICs
-and freeBSD of opnsense combo... so virtualization time...<br>
-XCPng had terrible throughput of \~50Mbit, Proxmox with virtio managed full \~300Mbit.
+* *Later experience* - Had MSI cubi miniPC and I installed opnsense on it
+under xcpng. But throughput was terrible, like \~50Mbit because of poor quality
+of freeBSD drivers for xen virtual NICs.<br>
+Proxmox with virtio NICs managed full \~300Mbit.
 
 </details>
 
