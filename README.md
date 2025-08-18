@@ -21,10 +21,10 @@ An alternative to Proxmox or ESXi/vCenter.
 
 [Xen](https://en.wikipedia.org/wiki/Xen)
 is an open source project, developed under **the Linux Foundation** with
-support from major industry players - aws, intel, amd, arm, google,
+support from major industry players - AWS, intel, amd, arm, google,
 alibaba cloud,...<br>
 2007-2013 Citrix directed Xen development, but gave up the control
-to attract more collaboration from the industry giants, of which aws(amazon)
+to attract more collaboration from the industry giants, of which AWS(amazon)
 is the biggest xen user. 
 
 [XCPng](https://en.wikipedia.org/wiki/XCP-ng) itself started on kickstarter
@@ -44,8 +44,7 @@ and have \~90 employees.
   and some extra features like [XOSTOR](https://vates.tech/xostor/)
   through webGUI.
 * **XCPng Center** - A windows desktop application for management of xcpng hosts,
-  a community project. Was abandonware but it has a new
-  [maintainer](https://github.com/xcp-ng/xenadmin).
+  just a community project.
 
 <details open>
 <summary><H1>Why XCP-ng</H1></summary>
@@ -59,15 +58,20 @@ and the search for ESXi replacement started.
 
 The absolute front runner candidate.
 Debian based, uses KVM for VMs, LXC for containers, native ZFS, native CEPH,
-**huge active community**, dozens of tech youtubers, a proven solution
-being out there for **20 years**. Made in Austria.<br>
+**a huge active community** with dozens of tech youtubers covering it.
+A proven solution being out there for **20 years**. Made in Austria.<br>
 Tried it and it looked good. Bit complicated, bit unpolished, but very powerful.
-The thing is that I never felt drawn to it. Felt like I would be spending
-**a lot of time learning** the ins and outs to get the confidence I had with esxi.
-And while that's expected, it's still a chore, still an annoyance.<br>
-This made me want to stick longer with esxi and let proxmox cook,
+The thing is that I never felt drawn to all that power and the very hands-on
+phylosophy.
+So many options, so much reliance on SSHing into a host to tweak configs directly.
+And I do love terminal, but keeping track of all those edits and tweaks...<br>
+Generally, it felt like I would be spending **a lot of time learning**
+the ins and outs to get the confidence I had with esxi.
+And while that's expected, it's still a chore, still an annoyance
+and PVE feels fragile and convoluted without that effort put in.<br>
+This all made me want to stick longer with esxi and let proxmox cook,
 get few more major releases and improvements as VMware refuges start to give
-feedback and money.
+feedback and money. 
   
 ### XCPng 
 
@@ -78,8 +82,8 @@ somewhere, it felt like everything was simple and
 And that apparently is what makes me enthusiastic about stuff.
 
 * Tried to spin **win11 24H2** and it just worked without manually dealing
-  with TPM. The VM creation did not feel overwhelming with 19 options
-  and settings, which all feel like opportunities for a fuck up.
+  with TPM. The VM creation did not feel overwhelming with 19 options per tab,
+  which all feel like opportunities for a fuck up.
   Once RDPed in, it felt fast and responsive, without anything weird
   happening and without being send to read 5 pages on how to tweak it to
   improve performance.
@@ -174,10 +178,10 @@ Also of note - the performance of a windows VM,
 **is not indicative of a performance of a linux VM**, but I dont feel like doing linux, it would be
 probably geekbench + fio and I hate dealing with fio test configs and results.
 
-*Experience* - Had to virtualize opnsense on a MSI cubi miniPC because broadcom NICs
-and freebsd driver for non-intel NICs being terrible.
-XCPng network throughput was bad, like 50 vs 300 Mbits.
-Had to go proxmox for that case.
+* *Later experience* - Had MSI cubi miniPC and I planed to install opnsense
+straight on metal, but there were issues and I thought because of realcom NICs
+and freeBSD of opnsense combo... so virtualization time...<br>
+XCPng had terrible throughput of \~50Mbit, Proxmox with virtio managed \~300Mbit.
 
 </details>
 
@@ -857,7 +861,7 @@ has a good article on these, especially with bit of history.
 * **A VM with "Generic Linux UEFI" preset 
   [failed to boot from arch ISO](https://i.imgur.com/cnnlBtJ.png)**<br>
   Weird issue. Seems the cause is that the ISO SR was created in `/media`
-  on the boot drive which was a small OEM nvme ssd that came with that miniPC.
+  on a small OEM nvme ssd that came with that miniPC.
   The thing is that I had 3 lenovo miniPCs at that time and every single
   one of them had this issue. Debian 12 ISO and template also had that issue.<br>
   Any change to the setup **solved the problem**.
@@ -871,8 +875,13 @@ has a good article on these, especially with bit of history.
   I am starting to wonder if my initial test with the i3-9100 really worked
   as well as I remember it.<br>
   Will keep testing as I get hands on some other machines.
-  * **i3-10105T** in an OptiPlex 3080.<br>
+  * **i3-10105T** in a Dell OptiPlex 3080.<br>
     Passthrough worked straight up without a hitch transcoding 8 streams.
+  * **i3-7100** in a Fujitsu D556.<br>
+    Passthrough worked transcoding 8 streams, cpu usage weirdly high.
+* **OPNsense** had poor network performance under xcpng caused by virtual
+  xen NICs having poor drivers on freeBSD. Would need intel NIC passthrough,
+  or its better to use proxmox with its virtio NICs which perform much better.
 
 <details>
 <summary><h1>Videos</h1></summary>
