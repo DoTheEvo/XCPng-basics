@@ -507,14 +507,15 @@ The **info is in the General tab** of every virtual machine.
 
 The above linked official docs tell well the details.
 
-* **citrix closed source VM windows tools**<br>
-  [Link to download from citrix site](https://www.xenserver.com/downloads)<br>
-  `XenServer VM Tools for Windows 9.4.0` - was in January 2025<br>
-  The **recommended go-to** way to get drivers and agent for windows VMs.
-  During install it asks if **automatic updates** for agent and drivers.
 * **xcpng open source VM windows tools**<br>
   [https://github.com/xcp-ng/win-pv-drivers/releases](https://github.com/xcp-ng/win-pv-drivers/releases)<br>
-  `XCP-ng Windows PV Tools 8.2.2.200-RC1` - as v9 seems still under slow development.
+  In October 2025 this set of tool got [finally](https://xcp-ng.org/blog/2025/10/10/signed-windows-pv-drivers-now-available/)
+  signed by microsoft, and became the official **recommended way** to install
+  guest tools on windows.
+* **citrix closed source VM windows tools**<br>
+  [Link to download from citrix site](https://www.xenserver.com/downloads)<br>
+  `XenServer VM Tools for Windows 9.4.2` - was in October 2025<br>
+  During install it asks if automatic updates for agent and drivers.
 
 Theres also a VM option, to get **the drivers** through **windows updates**,
 but reading the docs, it's just a driver and the VM **still needs the agent**,
@@ -580,8 +581,15 @@ At the moment I just played with rolling snapshots, backups, and delta backups.
     Incremental backups of only changes against the initial full back<br>
     * [CBT](https://xen-orchestra.com/blog/xen-orchestra-5-96/)
     \- Changed Block Tracking<br>
-    a new and a better way to do incremental backups,
-    but its not yet battle tested.
+    A new improved way to do delta backups of changes,
+    similar to kopia, restic or borgbackups.<br>
+    With regular incremental backup you have the initial full backup,
+    and then incremental backups do just changes, and you need them all...
+    but this new approach just keeps maps of changed blocks, and backup from
+    any day just knows which blocks it wants and dont care about other days or 
+    a concept of full backup vs incremental, they are all full backups.<br>
+    NBD on the Pool Network has to be enabled so that XO can acces disk images as
+    block devices over the network.
   * **Disaster Recovery**<br>
     Full replication. The backup of the VM can be started immediately,
     no restoration.
