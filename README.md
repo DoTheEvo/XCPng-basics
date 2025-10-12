@@ -503,6 +503,8 @@ The **info is in the General tab** of every virtual machine.
 <details>
 <summary><h4>Windows</h4></summary>
 
+![install_guest_tools_pic](https://i.imgur.com/e81dFtZ.png)
+
 [The official docs.](https://xcp-ng.org/docs/guests.html#windows)
 
 The above linked official docs tell well the details.
